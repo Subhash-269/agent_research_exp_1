@@ -35,3 +35,8 @@
 2026-11-05T14:47Z  11646703  06_charge_failed_cells.sbatch  short/none  charges all 14 unproductive jobs through emit.job_cost
 2026-11-05T14:48Z  11646721  cell_tnf_bon.sbatch   gpu/gpu:a100:1 (explicit)  PROBE 1 of 2 before the rest of the sweep: multi-chain + largest nsamples. seed 20261106 nsamples 16 batch_size 2
 2026-11-05T14:49Z  11646743  cell_tnf_beam.sbatch  gpu/gpu:a100:1 (explicit)  PROBE 2 of 2: beam-search folds beam_width x n_branch = 16 candidates per checkpoint, the other way this can exhaust VRAM. search.max_batch_size inherits batch_size, so it is now bounded at 2. seed 20261107 nsamples 4 batch_size 2
+2026-11-05T15:15Z  --  VRAM settled (S4). Job 11646721 telemetry CSV, 273 samples: peak memory.used 15813 MiB of 40960 on an A100-SXM4-40GB at batch_size=2, repository-shipped precision, mean GPU util 32.0%. 15813/40960 = 38.6%, headroom 25147 MiB. 11646330 died at 335 s with batch_size=16; 11646721 ran 24+ min past that. The failure was batch size, not the card.
+2026-11-05T15:15Z  --  Throughput, first A100 evidence: ~19 min of generation for nsamples=16 after ~400 s fixed load is roughly 70 s/sample, against 75.2 s/sample measured on the H200. The A100 is not materially slower for this workload, so nsamples=16 was conservative.
+2026-11-05T15:16Z  11647423  cell_tnf_fk.sbatch    gpu/gpu:a100:1 (explicit)  seed 20261108 nsamples 4 batch_size 2
+2026-11-05T15:16Z  11647431  cell_tnf_mcts.sbatch  gpu/gpu:a100:1 (explicit)  seed 20261109 nsamples 4 batch_size 2
+2026-11-05T15:17Z  11647436  cell_tnf_gh.sbatch    gpu/gpu:a100:1 (explicit)  seed 20261110 nsamples 4 batch_size 2  Generate-and-Hallucinate repo-internal variant

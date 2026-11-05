@@ -1,0 +1,14 @@
+  11646743   cxa_tnf_beam  PENDING       0:00
+  11646721    cxa_tnf_bon  RUNNING      24:26
+--- log tail ---
+=== cell tnf_bon  job=11646721  node=d1026  2026-11-05T14:49:22Z ===
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=16 batch_size=2
+run_name=cxaB_tnf_bon_11646721  walltime_limit=7200s
+NVIDIA A100-SXM4-40GB, 40960 MiB, 8.0
+NVIDIA A100-SXM4-40GB, 40960 MiB, 8.0
+PROGRESS 2026-11-05T14:49:24Z 1/5 generate  method=best-of-n nsamples=16
+
+--- telemetry peak so far ---
+273
+peak memory.used MiB: 15813
+mean GPU util %: 32.0184

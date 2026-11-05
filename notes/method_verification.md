@@ -147,3 +147,35 @@ BindCraft, BoltzDesign1 and AlphaDesign are **not installed, not run and not
 reported**. They are deferred because their environments cannot be built inside
 this budget — not because they were tried and failed. No cross-family
 comparison was made.
+
+---
+
+## A100 VRAM at batch_size=2 — the S4 measurement that was missing
+
+**measured**, job 11646721, `38_TNFalpha` x best-of-n, nsamples=16, batch_size=2, on an
+NVIDIA A100-SXM4-40GB (40960 MiB, compute capability 8.0), numeric precision as the repository
+ships it (no precision override passed; torch 2.7.0+cu126).
+
+Read from the job's own telemetry CSV, 273 samples at 10 s intervals:
+
+```
+peak memory.used   15813 MiB   of 40960   (38.6%)
+mean GPU util      32.0 %
+```
+
+**inferred**: 15813 / 40960 = 38.6% of the card. Headroom = 40960 - 15813 = 25147 MiB.
+
+Compare the same batch on the H200 (job 11638953, nsamples=2): peak 12580 MiB. The A100 figure is
+higher by 15813 - 12580 = 3233 MiB, which I do not attempt to explain - different card, different
+allocator behaviour, different nsamples. *Hypothesis (unverified from this session): allocator
+caching rather than a larger working set.* **Observed:** both peaks, both cards. **Not observed:**
+a per-tensor breakdown.
+
+What this settles: **the OOM is fixed, and not by luck.** Job 11646330 died 335 s in at
+batch_size=16; 11646721 passed 24 minutes at batch_size=2 with 25 GB of headroom. The failure was
+batch size, not the card.
+
+A VRAM figure without its precision is not a measurement (S4), so: the above is at the
+repository's shipped precision on an A100-SXM4-40GB. It does not transfer to another card or to a
+different precision, and it is not evidence about batch sizes between 2 and 16, which were never
+tried.
