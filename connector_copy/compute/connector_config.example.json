@@ -1,0 +1,39 @@
+{
+  "_comment": "Copy to connector_config.json and fill in user + account. That file is gitignored.",
+  "_gpu_ladder": "On Explorer, prefer gpu:h200:1, then gpu:a100:1, then gpu:v100-sxm2:1 (fp32 only - say so in any number you report). Everything else faster than an A100 lives in the 1-hour 'sharing' partition.",
+  "_account": "Find yours with: sacctmgr show assoc user=$USER format=account%40",
+  "default": "hpc",
+  "runners": {
+    "hpc": {
+      "host": "login.explorer.northeastern.edu",
+      "user": "",
+      "key": "~/.ssh/id_ed25519_explorer",
+      "account": "",
+      "partition": "gpu",
+      "gres": "gpu:h200:1",
+      "time": "02:00:00",
+      "project_dir": "$HOME/hpcjobs",
+      "hf_home": "/scratch/$USER/hf",
+      "pip_cache_dir": "/scratch/$USER/pip",
+      "torch_home": "/scratch/$USER/torch"
+    },
+    "runpod": {
+      "gpu_type": "NVIDIA A100-SXM4-80GB",
+      "gpu_count": 1,
+      "image": "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
+      "cloud_type": "SECURE",
+      "disk_gb": 30,
+      "volume_gb": 0,
+      "key": "~/.ssh/id_ed25519",
+      "pubkey": "~/.ssh/id_ed25519.pub",
+      "api_key_env": "RUNPOD_API_KEY"
+    },
+    "aws": {
+      "region": "us-east-1",
+      "instance_type": "g5.xlarge",
+      "key_name": "capstone",
+      "pem": "~/.ssh/aws-capstone.pem",
+      "profile": "default"
+    }
+  }
+}

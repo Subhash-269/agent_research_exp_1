@@ -1,0 +1,18 @@
+# real config - never commit
+connector_config.json
+
+# keys, in case anyone drops one here
+id_*
+*.pem
+!*.pub
+
+# local job output
+logs/
+
+# connector runtime artifacts
+jobs.jsonl
+fetched/
+__pycache__/
+
+# audit trail - local record, not shared
+audit.log

@@ -1,0 +1,38 @@
+# Ignore rules designed from what this workspace actually contains.
+# Each entry says why it is excluded. R8 requires the reasoning to be visible.
+
+# --- credentials / operator identity -------------------------------------
+# connector_config.json carries the operator's cluster user and account.
+# AGENTS.md says to use it and not to read it for anything else; it must not
+# be committed. The .example file is safe and IS committed.
+connector_copy/compute/connector_config.json
+
+# --- machine-local caches, not readable source ---------------------------
+__pycache__/
+*.pyc
+
+# --- large binary artifacts -----------------------------------------------
+# Apptainer images, model checkpoints and folded-structure archives are large
+# binaries that cannot be read usefully in a diff and are reproducible from
+# the recorded commands.
+*.sif
+*.ckpt
+*.pt
+*.pth
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# --- built environments ---------------------------------------------------
+# Anything pip/uv/conda materialises locally is a build product, not source.
+.venv/
+venv/
+env_build/
+
+# NOTE on what is deliberately NOT ignored:
+#   jobs/*.sbatch        - job scripts I author; the primary record of what ran
+#   sacct/*              - scheduler output saved per S11; small text
+#   logs/*               - fetched job stdout; the evidence behind every claim
+#   results/*.csv, *.json - emitted records and curves, small text
+#   connector_copy/compute/audit.log, jobs.jsonl - the connector's own trail

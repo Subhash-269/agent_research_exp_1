@@ -1,0 +1,5 @@
+# <utc>  <absolute path>  <one line: why you needed it>
+2026-11-05T06:15:00Z  C:/Users/subha/Desktop/Workspace/Personal/RA_Full_Run/AGENTS.md  the operating brief itself; read to know what to do, then copied into workspace/briefs/ per R8
+2026-11-05T06:15:00Z  C:/Users/subha/Desktop/Workspace/Personal/RA_Full_Run/PROJECT.md  the project brief; read for the science task, then copied into workspace/briefs/ per R8
+2026-11-05T06:16:00Z  C:/Users/subha/Desktop/Workspace/Personal/RA_Full_Run/agenticAI_with_GPUs/  the GPU connector named by AGENTS.md; read for provenance (git remote, HEAD) and copied to workspace/connector_copy
+2026-11-05T06:17:00Z  C:/Users/subha/Desktop/Workspace/Personal/RA_Full_Run/emit.py  a copy of the recording module sits beside AGENTS.md; checksummed only, to compare against the cluster-staged copy which is authoritative
