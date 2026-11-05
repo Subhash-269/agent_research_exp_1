@@ -1,0 +1,260 @@
+=== cxa_smoke_tnf  job=11638953  node=d4053  2026-11-05T07:54:41Z ===
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=2 run_name=cxaB_smoke_tnf_11638953
+PROGRESS 2026-11-05T07:54:41Z 1/8 hardware attestation (S2)
+name, memory.total [MiB], driver_version, compute_cap
+NVIDIA H200, 143771 MiB, 570.86.15, 9.0
+OK   2026-11-05T07:54:41Z stage 'nvidia_smi' exited 0
+Complexa environment initialized for uv runtime.
+COMPLEXA_INIT=uv  DATA_PATH=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets
+{
+  "gpu_present": true,
+  "vendor": "NVIDIA (torch.version.hip is None -> CUDA build, not ROCm)",
+  "device_name": "NVIDIA H200",
+  "vram_total_mib": 143167,
+  "compute_capability": "9.0",
+  "cuda_runtime": "12.6",
+  "torch_version": "2.7.0+cu126",
+  "bf16_supported": true
+}
+attested
+OK   2026-11-05T07:54:49Z stage 'torch_attest' exited 0
+PROGRESS 2026-11-05T07:54:49Z 1b/8 S4 - VRAM and speed at float32 and bfloat16 on this device
+{
+  "device": "NVIDIA H200",
+  "matmul_n": 4096,
+  "reps": 20,
+  "float32": {
+    "peak_vram_mib": 288.0,
+    "seconds_per_matmul": 0.005935
+  },
+  "bfloat16": {
+    "peak_vram_mib": 160.0,
+    "seconds_per_matmul": 0.00279
+  }
+}
+OK   2026-11-05T07:54:54Z stage 'precision_probe' exited 0
+PROGRESS 2026-11-05T07:54:54Z 1c/8 jax devices
+jax 0.4.29 [cuda(id=0)]
+OK   2026-11-05T07:54:57Z stage 'jax_devices' exited 0
+PROGRESS 2026-11-05T07:54:57Z 2/8 multi-chain target inspection (S10)
+task: 38_TNFalpha
+target_input: A12-157,B12-157,C12-157
+hotspots: ['A113', 'C73']
+binder_length: [50, 120]
+target_path: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets/target_data/alpha_proteo_targets/1tnf_cropped.pdb exists: True
+chains in the shipped PDB: {'A': 1142, 'B': 1142, 'C': 1142}
+n_chains: 3
+OK   2026-11-05T07:54:57Z stage 'target_chains' exited 0
+PROGRESS 2026-11-05T07:54:57Z 3/8 complexa design (generate -> filter -> evaluate -> analyze)
+                    INFO                  [-] seq_1:      binder_analysis.py:634
+                             i_pAE=0.855(X)                                     
+                             pLDDT=0.600(X)                                     
+                             scRMSD_ca=0.554(ok)                                
+                    INFO                  [-] seq_2:      binder_analysis.py:634
+                             i_pAE=0.844(X)                                     
+                             pLDDT=0.642(X)                                     
+                             scRMSD_ca=0.502(ok)                                
+                    INFO                  [-] seq_3:      binder_analysis.py:634
+                             i_pAE=0.859(X)                                     
+                             pLDDT=0.598(X)                                     
+                             scRMSD_ca=0.580(ok)                                
+                    INFO                  [-] seq_4:      binder_analysis.py:634
+                             i_pAE=0.843(X)                                     
+                             pLDDT=0.639(X)                                     
+                             scRMSD_ca=0.487(ok)                                
+                    INFO                  [-] seq_5:      binder_analysis.py:634
+                             i_pAE=0.851(X)                                     
+                             pLDDT=0.590(X)                                     
+                             scRMSD_ca=0.604(ok)                                
+                    INFO                  [-] seq_6:      binder_analysis.py:634
+                             i_pAE=0.842(X)                                     
+                             pLDDT=0.640(X)                                     
+                             scRMSD_ca=0.534(ok)                                
+                    INFO                  [-] seq_7:      binder_analysis.py:634
+                             i_pAE=0.874(X)                                     
+                             pLDDT=0.612(X)                                     
+                             scRMSD_ca=0.581(ok)                                
+                    INFO       [mpnn] Result: 0/2 samples binder_analysis.py:387
+                             passed (0%)                                        
+                    DEBUG    Saved filtered results to     analysis_utils.py:396
+                             ./evaluation_results/search_b                      
+                             inder_local_pipeline_38_TNFal                      
+                             pha_cxaB_smoke_tnf_11638953/a                      
+                             ll_successes_protein_binder_m                      
+                             pnn.csv                                            
+                    INFO              Successful: self(0),       analyze.py:1413
+                             mpnn(0)                                            
+                    INFO       [3/4] FoldSeek + MMseqs diversity analyze.py:1423
+                    INFO     Computing binder diversity compute_diversity.py:235
+                             with foldseek, this may                            
+                             take a few minutes -                               
+                             all_generated                                      
+                    DEBUG    Computing Foldseek         compute_diversity.py:290
+                             diversity for group 0 with                         
+                             2 PDB paths                                        
+                    INFO     Clustering 2 structures with       diversity.py:112
+                             Foldseek easy-cluster                              
+[11/05/26 03:06:31] INFO     Cluster file saved to              diversity.py:173
+                             ./evaluation_results/search_binder                 
+                             _local_pipeline_38_TNFalpha_cxaB_s                 
+                             moke_tnf_11638953/clusters_binder_                 
+                             all_generated/res_cluster.tsv                      
+                    INFO     PDB paths saved to                 diversity.py:184
+                             ./evaluation_results/search_binder                 
+                             _local_pipeline_38_TNFalpha_cxaB_s                 
+                             moke_tnf_11638953/clusters_binder_                 
+                             all_generated/original_pdb_paths.t                 
+                             xt                                                 
+                    INFO     Combined cluster assignments saved diversity.py:230
+                             to                                                 
+                             ./evaluation_results/search_binder                 
+                             _local_pipeline_38_TNFalpha_cxaB_s                 
+                             moke_tnf_11638953/clusters_binder_                 
+                             all_generated/cluster_assignments.                 
+                             csv                                                
+[11/05/26 03:06:32] DEBUG    Original complex PDB paths compute_diversity.py:326
+                             saved to                                           
+                             ./evaluation_results/searc                         
+                             h_binder_local_pipeline_38                         
+                             _TNFalpha_cxaB_smoke_tnf_1                         
+                             1638953/clusters_binder_al                         
+                             l_generated/original_pdb_p                         
+                             aths_.txt                                          
+                    INFO     Computing binder diversity compute_diversity.py:388
+                             with mmseqs, this may take                         
+                             a few minutes -                                    
+                             all_generated                                      
+                    DEBUG    Computing MMseqs diversity compute_diversity.py:398
+                             for group 0 with 2 PDB                             
+                             paths                                              
+                    ERROR    MMseqs failed for all_generated:    analyze.py:1475
+                             [Errno 2] No such file or                          
+                             directory:                                         
+                             '/scratch/nitta.v/complexa_armB_202                
+                             61105/src/Proteina-Complexa/.venv/b                
+                             in/mmseqs'                                         
+                    INFO       [4/4] Interface metrics + save    analyze.py:1497
+                    INFO     No successful samples for self,     analyze.py:1015
+                             skipping interface metrics                         
+                    INFO     No successful samples for mpnn,     analyze.py:1015
+                             skipping interface metrics                         
+                    DEBUG    Saved combined success       binder_analysis.py:130
+                             criteria to                                        
+                             ./evaluation_results/search_                       
+                             binder_local_pipeline_38_TNF                       
+                             alpha_cxaB_smoke_tnf_1163895                       
+                             3/success_criteria_protein_b                       
+                             inder.json                                         
+                    DEBUG    Overall performance saved to        analyze.py:1527
+                             ./evaluation_results/search_binder_                
+                             local_pipeline_38_TNFalpha_cxaB_smo                
+                             ke_tnf_11638953/overall_binder_perf                
+                             ormance_search_binder_local_pipelin                
+                             e_aggregated.csv                                   
+                    INFO                                         analyze.py:1590
+                    INFO     +---------------------------------- analyze.py:1591
+                             ----------------------------------+                
+                    INFO     |                      BINDER       analyze.py:1592
+                             ANALYSIS COMPLETE                                  
+                             |                                                  
+                    INFO     +---------------------------------- analyze.py:1593
+                             ----------------------------------+                
+                    INFO                                         analyze.py:1594
+                    WARNING  Skipping 'monomer' analysis mode -  analyze.py:3139
+                             no monomer metrics found in                        
+                             results. Expected columns like                     
+                             '_res_scRMSD_ca_*' or                              
+                             '_res_co_scRMSD_ca_*'. Ensure                      
+                             evaluate ran with                                  
+                             compute_monomer_metrics=true.                      
+                    DEBUG    Removed temporary directory:        analyze.py:2873
+                             tmp_diversity                                      
+                    DEBUG    Removed temporary directory:        analyze.py:2873
+                             tmp_mmseqs_diversity                               
+                    INFO     Organized results into              analyze.py:2877
+                             subdirectories: diversity/ (1                      
+                             files), filter_results/ (1 files),                 
+                             clusters/ (1 files)                                
+                    INFO                                         analyze.py:3216
+                    INFO     =================================== analyze.py:3217
+                             ===================================                
+                    INFO       ANALYSIS COMPLETE                 analyze.py:3218
+                    INFO     =================================== analyze.py:3219
+                             ===================================                
+                    INFO       Completed:     binder             analyze.py:3221
+                    INFO       Skipped:       monomer            analyze.py:3223
+                    INFO       Results dir:                      analyze.py:3224
+                             ./evaluation_results/search_binder_                
+                             local_pipeline_38_TNFalpha_cxaB_smo                
+                             ke_tnf_11638953                                    
+                    INFO     =================================== analyze.py:3225
+                             ===================================                
+                    INFO                                         analyze.py:3226
+  ✓ analyze completed in 79.0s
+
+============================================================
+  ✓ Design pipeline completed in 11.6 minutes
+============================================================
+
+design wall seconds: 697
+OK   2026-11-05T08:06:34Z stage 'complexa_design' exited 0
+PROGRESS 2026-11-05T08:06:34Z 4/8 output layout
+--- ./inference dirs matching this run ---
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/inference/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953
+--- ./evaluation_results dirs matching this run ---
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953
+--- every sequence_type_stats.json under this run's evaluation output ---
+EVAL_DIR=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/job_0_n_488_id_0_bon_orig0_r0/sequence_type_stats.json
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/job_0_n_545_id_0_bon_orig1_r0/sequence_type_stats.json
+count: 2
+--- result CSVs ---
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/RAW_protein_binder_results_search_binder_local_pipeline_combined.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/RAW_protein_binder_results_search_binder_local_pipeline_combined_transposed.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/all_successes_protein_binder_mpnn.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/all_successes_protein_binder_self.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/binder_results_search_binder_local_pipeline_0.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/clusters/clusters_binder_all_generated/cluster_assignments.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/diversity/res_div_foldseek_binder_all_generated.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/filter_results/res_filter_binder_pass_overall.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/overall_binder_performance_search_binder_local_pipeline_aggregated.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/res_timing.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/timing_0.csv
+/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/timing_summary.csv
+PROGRESS 2026-11-05T08:06:35Z 5/8 stats schema
+[record] 2 sequence_type_stats.json under /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953
+[schema] file: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/job_0_n_488_id_0_bon_orig0_r0/sequence_type_stats.json
+[schema] seq types: ['mpnn', 'self']
+[schema]   self: sections ['aa_stats', 'complex_stats', 'rmsd_stats']
+[schema]     complex_stats[0] keys: ['avg_ipSAE', 'avg_ipSAE_10', 'complex_pdb_path', 'i_pAE', 'i_pTM', 'max_ipSAE', 'max_ipSAE_10', 'min_ipAE', 'min_ipSAE', 'min_ipSAE_10', 'pAE', 'pLDDT', 'pTM']
+[schema]     complex_stats length: 1
+[schema]     rmsd_stats[0] keys: ['binder_scRMSD', 'binder_scRMSD_allatom', 'binder_scRMSD_bb3', 'binder_scRMSD_bb3o', 'binder_scRMSD_ca', 'complex_scRMSD', 'complex_scRMSD_ca']
+[schema]     rmsd_stats length: 1
+[schema]     aa_stats[0] keys: ['binder_length', 'interface_counts', 'residue_counts']
+[schema]     aa_stats length: 1
+[schema]   mpnn: sections ['aa_stats', 'complex_stats', 'rmsd_stats']
+[schema]     complex_stats[0] keys: ['avg_ipSAE', 'avg_ipSAE_10', 'complex_pdb_path', 'i_pAE', 'i_pTM', 'max_ipSAE', 'max_ipSAE_10', 'min_ipAE', 'min_ipSAE', 'min_ipSAE_10', 'pAE', 'pLDDT', 'pTM']
+[schema]     complex_stats length: 8
+[schema]     rmsd_stats[0] keys: ['binder_scRMSD', 'binder_scRMSD_allatom', 'binder_scRMSD_bb3', 'binder_scRMSD_bb3o', 'binder_scRMSD_ca', 'complex_scRMSD', 'complex_scRMSD_ca']
+[schema]     rmsd_stats length: 8
+[schema]     aa_stats[0] keys: ['binder_length', 'interface_counts', 'residue_counts']
+[schema]     aa_stats length: 8
+OK   2026-11-05T08:06:35Z stage 'dump_schema' exited 0
+PROGRESS 2026-11-05T08:06:35Z 6/8 emit designs and scores
+[record] 2 sequence_type_stats.json under /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953
+[record] designs=2 scores=18
+OK   2026-11-05T08:06:35Z stage 'record_results' exited 0
+PROGRESS 2026-11-05T08:06:35Z 7/8 metric ranges
+ipae_stored: n=18 min=0.8400 max=0.9500
+ipae_angstrom: n=18 min=26.0400 max=29.4500
+plddt_0to1: n=18 min=0.5900 max=0.7160
+scrmsd_angstrom: n=18 min=0.4866 max=2.2308
+
+Why both ipAE columns are reported: applying the '< 7' threshold to
+the STORED value would pass essentially every design. The Angstrom
+column is stored x 31 and is the one the threshold belongs on.
+OK   2026-11-05T08:06:35Z stage 'metric_ranges' exited 0
+PROGRESS 2026-11-05T08:06:35Z 8/8 done
+=== SUMMARY  STAGE_RC=0  2026-11-05T08:06:35Z ===
+telemetry rows: 144
+peak GPU memory.used (MiB) seen by the sampler: 12580

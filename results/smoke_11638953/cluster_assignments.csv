@@ -1,0 +1,3 @@
+cluster_index,sample_index,path_name
+0,1,./evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/tmp_diversity/group_0/job_0_n_545_id_0_bon_orig1_r0_binder_0.pdb
+1,2,./evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_smoke_tnf_11638953/tmp_diversity/group_0/job_0_n_488_id_0_bon_orig0_r0_binder_1.pdb
