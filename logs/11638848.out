@@ -1,0 +1,89 @@
+=== cxa_haiku  job=11638848  node=c0219  2026-11-05T07:48:19Z ===
+PROGRESS 2026-11-05T07:48:19Z 0/5 charge 11638744
+[charge] already on record: ['11637680', '11638284', '11638336', '11638423', '11638677']
+[charge] 11638744: FAILED elapsed=114s gpus=0 -> 0.0 GPU-hours (114 s x 0 GPU / 3600)
+[charge] charged 1, skipped 0
+OK   2026-11-05T07:48:20Z stage 'charge_11638744' exited 0
+PROGRESS 2026-11-05T07:48:20Z 1/5 confirm the atomworks pin from 11638744 is still in place
+Environment variable PDB_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+atomworks 2.2.1 from_contig: True
+proteinfoundation.utils.pdb_utils imports OK
+OK   2026-11-05T07:48:41Z stage 'atomworks_still_ok' exited 0
+PROGRESS 2026-11-05T07:48:41Z 2/5 find a dm-haiku that works with jax 0.4.29
+[pin] dm-haiku: currently 0.0.17
+[pin] 20 releases published; trying the newest 14
+[pin] installed 0.0.17 fails: AttributeError: module 'jax.core' has no attribute 'take_current_trace'
+[pin] 0.0.16: PASS  haiku 0.0.16 jax 0.4.29
+RESULT dm-haiku==0.0.16
+OK   2026-11-05T07:49:20Z stage 'pin_dm_haiku' exited 0
+PROGRESS 2026-11-05T07:49:20Z 3/5 full import chain
+ok   torch 2.7.0+cu126
+ok   jax 0.4.29
+ok   haiku 0.0.16
+Environment variable CCD_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+Environment variable PDB_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+ok   atomworks 2.2.1
+ok   colabdesign ?
+ok   transformers.models.esm.modeling_esm
+ok   proteinfoundation.utils.pdb_utils
+ok   proteinfoundation.search.search_factory
+Error while loading libcue_ops.so: libcuda.so.1: cannot open shared object file: No such file or directory
+ok   proteinfoundation.proteina
+Loading Atomworks Patches
+[atomworks_patches] Patched initialize_chain_info_from_category
+[atomworks_patches] Patched atom_array_to_encoding (added atomize_token parameter)
+ok   proteinfoundation.generate
+ok   proteinfoundation.evaluate
+ok   proteinfoundation.analyze
+every module the pipeline imports is importable
+OK   2026-11-05T07:52:00Z stage 'full_import_chain' exited 0
+PROGRESS 2026-11-05T07:52:00Z 4/5 re-freeze
+OK   2026-11-05T07:52:01Z stage 'uv_pip_freeze' exited 0
+atomworks==2.2.1
+biotite==1.4.0
+dm-haiku==0.0.16
+flax==0.9.0
+jax==0.4.29
+jax-cuda12-pjrt==0.4.29
+jax-cuda12-plugin==0.4.29
+jaxlib==0.4.29+cuda12.cudnn91
+jaxtyping==0.3.11
+torch==2.7.0+cu126
+torch-cluster==1.6.3+pt27cu126
+torch-geometric==2.8.1
+torch-scatter==2.1.2+pt27cu126
+torch-sparse==0.6.18+pt27cu126
+torchaudio==2.7.0+cu126
+torchmetrics==1.9.0
+torchvision==0.22.0+cu126
+transformers==5.22.1
+PROGRESS 2026-11-05T07:52:01Z 5/5 complexa validate design
+
+  [93m[1m⚠ Warnings (1):[0m
+    [93m⚠[0m Shape complementarity (sc)
+      [2mFile not found: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/env/docker/internal/sc[0m
+      [96m💡 Ensure the file exists at the specified path[0m
+
+  [92m[1m✓ Passed (6):[0m
+    [92m✓[0m .env file: Found
+    [92m✓[0m DATA_PATH: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets
+    [92m✓[0m Config file: configs/search_binder_local_pipeline.yaml
+    [92m✓[0m Complexa checkpoint: ckpts/complexa.ckpt
+    [92m✓[0m Autoencoder checkpoint: ckpts/complexa_ae.ckpt
+    [92m✓[0m Foldseek: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/foldseek
+
+──────────────────────────────────────────────────────────────────────
+  [93m⚠ Validation passed with warnings[0m
+======================================================================
+
+OK   2026-11-05T07:52:02Z stage 'validate_design' exited 0
+=== SUMMARY  STAGE_RC=0  2026-11-05T07:52:02Z ===

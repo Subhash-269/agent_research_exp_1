@@ -9,3 +9,4 @@
 2026-11-05T07:40Z  11638677  03_atomworks_fix.sbatch  short/none  phase 0 atomworks API probe + charge 11638284/11638336/11638423, CPU only, 0 GPU-hours
 2026-11-05T07:45Z  11638744  04_atomworks_pin.sbatch  short/none  phase 0 atomworks pin via wheel-source probe
 2026-11-05T07:50Z  11638848  05_haiku_pin.sbatch  short/none  phase 0 dm-haiku pin + full import chain, CPU only, 0 GPU-hours
+2026-11-05T07:55Z  11638953  02_smoke_multichain.sbatch  gpu/gpu:h200:1  phase 1 multi-chain smoke, 3rd attempt, after dm-haiku 0.0.16 + atomworks 2.2.1 pins and a full import-chain check
