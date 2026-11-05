@@ -1,0 +1,109 @@
+===== IDENTITY =====
+host: explorer-01
+user: nitta.v
+date: 2026-11-05T01:21:21-05:00
+os:   Rocky Linux release 9.7 (Blue Onyx)
+
+===== SCHEDULER / PARTITIONS =====
+slurm 23.11.6
+--- partitions visible to us ---
+PARTITION            AVAIL TIMELIMIT  NODES  NODELIST
+gpu                  up    8:00:00    25     c[2204-2207],d[1002,1007,1009-1013,1015,1017,1019-1020,1022,1025-1029,4052-4055]
+short*               up    2-00:00:00 252    c[0160-0164,0171,0180,0184-0185,0190-0191,0204,0207,0211,0213,0215-0216,0219,0221-0222,0227,0232-0235,0237,0239,0244-0245,0247,0277,0279,0281,0283,0314-0315,0319,0393-0404,0406-0423,0536-0550,0585-0587,0589,0591-0597,0599-0600,0602-0616,0618-0622,0624-0625,0627-0637,0639-0641,0643-0646,0649-0654,0656-0659,0664,0667-0670,0672-0678,0680-0681,0683,0685-0690,0692-0693,3002-3005,3008,3010-3011,3015-3017,3022-3031,3033-3038,3089-3092,3147-3156],d[0002-0005,0012-0014,0020,0022-0024,0026-0039,0064,0076,0085,0097,0100,0105,0110,0113,0126,0139,0142-0147,0149-0150,1027]
+courses-gpu          up    1-00:00:00 14     c[2184-2195],d[1004,1011]
+courses              up    1-00:00:00 21     c[0584,0598,0601,0617,0638,0642,0648,0655,0662,0666,3014,3039],d[0010-0011,0016-0018,0036,0125,0135,0144]
+sharing              up    1:00:00    454    c[0160-0164,0171,0207,0211,0219,0222,0234,0237,0239,0244,0277,0279,0281,0283,0314,0393-0404,0406-0423,0441-0487,0522,0536-0550,0585-0587,0591-0595,0597,0599-0600,0602-0616,0618-0622,0624-0625,0627-0637,0639,0641,0643-0646,0649-0654,0656-0659,0664,0668-0669,0673-0677,0680,0683,0685,0689-0690,0744-0751,0753-0759,2184-2195,3002-3005,3008,3010-3011,3015-3017,3022-3023,3025-3029,3040,3081-3082,3086,3096-3127,3132,3135,3138,3177-3188,3190-3192,3194-3198,3201-3221,3223-3224,4028-4031,4035,5002],d[0002-0005,0007,0010-0014,0020,0023-0024,0026-0039,0050,0064,0076,0085,0097,0100,0105,0110,0113,0126,0142-0143,0147,0149-0150,1004,1027,3037-3038,3040-3041,3044-3049,3051-3053,3057-3058,3060-3061,3063-3065,3067-3071,3089-3098,3123,3146-3147,3149-3150,3155,3163-3166,3168,3170-3171,3194,3203-3206,3208,3210-3213,3215-3222,3224-3226,3230-3233,3239,4031-4032,4041-4044,4046-4051,4056,4073-4075,4077-4078,4100]
+gpu-short            up    2:00:00    25     c[2204-2207],d[1002,1007,1009-1013,1015,1017,1019-1020,1022,1025-1029,4052-4055]
+gpu-interactive      up    2:00:00    25     c[2204-2207],d[1002,1007,1009-1013,1015,1017,1019-1020,1022,1025-1029,4052-4055]
+--- GPU nodes and their gres ---
+gpu                  gpu:v100-pci 1      down*
+gpu                  gpu:v100-sxm 2      down*
+gpu                  gpu:h200:8   1      comp
+gpu                  gpu:a100:4   1      drain
+gpu                  gpu:v100-pci 2      mix
+gpu                  gpu:v100-sxm 9      mix
+gpu                  gpu:v100-sxm 1      mix
+gpu                  gpu:v100-sxm 1      mix
+gpu                  gpu:t4:4(S:0 1      mix
+gpu                  gpu:a100:3   1      mix
+gpu                  gpu:a100:4   1      mix
+gpu                  gpu:h200:8   3      mix
+gpu                  gpu:v100-pci 1      alloc
+short*               gpu:v100-sxm 1      mix
+courses-gpu          gpu:v100-sxm 2      mix
+courses-gpu          gpu:p100:3(S 2      idle
+courses-gpu          gpu:p100:4(S 6      idle
+courses-gpu          (null)       4      idle
+sharing              gpu:quadro:3 1      drain*
+sharing              gpu:mi50:8   1      drain*
+sharing              gpu:a100:8   4      down*
+sharing              gpu:a100:7   1      down*
+sharing              gpu:v100-sxm 3      mix
+sharing              gpu:quadro:3 1      mix
+sharing              gpu:v100:4   1      mix
+sharing              gpu:a5000:8  4      mix
+sharing              gpu:a6000:8  2      mix
+sharing              gpu:l40:10   2      mix
+sharing              gpu:a100:3   1      mix
+sharing              gpu:h100:4   1      mix
+--- your slurm associations / limits ---
+aly6980.202710||normal||
+--- QOS table ---
+normal|||
+gpu|gres/gpu=4||8
+multigpu|gres/gpu=8||8
+netsi|||
+test|||
+debug|cpu=128,mem=512G||
+express|cpu=2048,mem=25T||
+short|cpu=1024,mem=25T||
+long|cpu=1024,mem=25T||
+large|||1000
+lopez|||
+green|||25
+lowpriority|cpu=1024,gres/gpu=8,mem=25T||
+ood|||
+courses-gpu|gres/gpu=2||
+sharing|gres/gpu=2|01:00:00|4
+gpu-short|gres/gpu=2||8
+gpu-interactive||02:00:00|4
+pi|||
+
+===== STORAGE (every volume the runtime touches) =====
+/home/nitta.v vast1-mghpcc-eth.neu.edu:/discovery/home  255T  152T  104T  60% /home
+/scratch     vast1-mghpcc-eth.neu.edu:/discovery/scratch  1.5P  1.3P  299T  81% /scratch
+/tmp         /dev/sda11      337G   24G  314G   7% /tmp
+/dev/shm     tmpfs           126G   24M  126G   1% /dev/shm
+--- quotas ---
+(quota cmd unavailable)
+
+===== EGRESS FROM LOGIN NODE =====
+  https://api.anthropic.com/v1/models -> 401
+  https://huggingface.co -> 200
+  https://github.com -> 200
+proxy vars: HTTPS_PROXY=unset HTTP_PROXY=unset
+
+===== CONTAINER / MODULE TOOLING =====
+apptainer version 1.4.5-3.el9
+apptainer version 1.4.5-3.el9
+--- fakeroot build possible? (decides container vs conda strategy) ---
+FAKEROOT BUILD: OK
+--- relevant modules ---
+anaconda3/2024.06
+cuda/12.1.1
+cuda/12.3.0
+cuda/12.3.0.old
+cuda/12.8.0
+cuda/13.2.0
+miniconda3/24.11.1
+miniconda3/25.9.1
+python/3.13.5
+
+===== NODE-LOCAL TOOLING =====
+  git          /usr/bin/git
+  python3      /usr/bin/python3
+  conda        MISSING
+  nvidia-smi   MISSING
+  rsync        /usr/bin/rsync
+===== PREFLIGHT COMPLETE =====
+

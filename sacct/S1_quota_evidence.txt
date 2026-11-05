@@ -1,0 +1,81 @@
+### S1 QUOTA EVIDENCE  2026-11-05T06:33:48Z  host=explorer-01
+--- cmd: quota -s
+quota: Unable to get a filedescriptor from mountpoint: /var/lib/containers/storage/overlay-containers/42d34e3f87bd6631b47bd36fde3a21181d038ccb3e2397911d9cc183cae50398/userdata/shm
+quota: Unable to get a filedescriptor from mountpoint: /var/lib/containers/storage/overlay-containers/42d34e3f87bd6631b47bd36fde3a21181d038ccb3e2397911d9cc183cae50398/userdata/shm
+quota: Unable to get a filedescriptor from mountpoint: /var/lib/containers/storage/overlay-containers/42d34e3f87bd6631b47bd36fde3a21181d038ccb3e2397911d9cc183cae50398/userdata/shm
+quota: error while getting quota from vast1-mghpcc-eth.neu.edu:/vast_shared for nitta.v (id 104766): Operation not permitted
+    rc=1
+--- cmd: lfs quota -h /home
+bash: line 1: lfs: command not found
+    rc=127
+--- cmd: lfs quota -h /scratch
+bash: line 1: lfs: command not found
+    rc=127
+--- cmd: vastquota
+bash: line 1: vastquota: command not found
+    rc=127
+--- cmd: mmlsquota
+bash: line 1: mmlsquota: command not found
+    rc=127
+--- cmd: beegfs-ctl --getquota
+bash: line 1: beegfs-ctl: command not found
+    rc=127
+--- cmd: df -h /home /scratch /tmp /dev/shm
+Filesystem                                   Size  Used Avail Use% Mounted on
+vast1-mghpcc-eth.neu.edu:/discovery/home     255T  152T  104T  60% /home
+vast1-mghpcc-eth.neu.edu:/discovery/scratch  1.5P  1.3P  299T  81% /scratch
+/dev/sda11                                   337G   24G  314G   7% /tmp
+tmpfs                                        126G   24M  126G   1% /dev/shm
+    rc=0
+--- cmd: df -h --output=source,size,used,avail,pcent /home
+Filesystem                                Size  Used Avail Use%
+vast1-mghpcc-eth.neu.edu:/discovery/home  255T  152T  104T  60%
+    rc=0
+--- cmd: stat -f -c "%n blocks=%b free=%f bsize=%S" /home /scratch /tmp
+/home blocks=267386880 free=108522338 bsize=1048576
+/scratch blocks=1610612736 free=312726065 bsize=1048576
+/tmp blocks=88206254 free=82150623 bsize=4096
+    rc=0
+### S16 PRIOR STATE
+--- cmd: ls -la /scratch/$USER
+total 0
+drwx------  2 nitta.v users    4096 Oct 28 12:45 .
+drwxr-xr-x+ 9 root    root     4096 Nov  4 18:01 ..
+drwxr-xr-x  2 nitta.v users    4096 Oct  7 04:44 bin
+drwxr-xr-x  2 nitta.v users    4096 Oct 19 01:52 binderpilot
+drwxr-xr-x  2 nitta.v users    4096 Oct  7 10:24 complexa_2026-10-07
+drwxr-xr-x  2 nitta.v users    4096 Oct  7 05:49 hf
+drwxr-xr-x  2 nitta.v rc-staff 4096 Sep 28 16:33 idle_bot_graphs
+drwxr-xr-x  2 nitta.v users    4096 Oct  6 15:21 pilot
+drwxr-xr-x  2 nitta.v users    4096 Oct  6 15:06 pip
+drwxr-xr-x  2 nitta.v users    4096 Oct 18 23:41 proteina
+drwxr-xr-x  2 nitta.v users    4096 Oct 19 12:15 ra2b_20261019
+drwxr-xr-x  2 nitta.v users    4096 Oct  7 10:26 tools
+drwxr-xr-x  2 nitta.v users    4096 Oct  6 15:06 torch
+drwxr-xr-x  2 nitta.v users    4096 Oct 28 12:45 trka-pilot-20261028T162307Z
+    rc=0
+--- cmd: ls -la /scratch/$USER/complexa_armB_20261105
+ls: cannot access '/scratch/nitta.v/complexa_armB_20261105': No such file or directory
+    rc=2
+--- cmd: ls -la $HOME/hpcjobs
+total 0
+drwxr-xr-x 2 nitta.v users 4096 Oct 26 17:03 .
+drwxr-xr-x 2 nitta.v users 4096 Oct 18 21:50 ..
+drwxr-xr-x 2 nitta.v users 4096 Oct 28 18:59 jobs
+drwxr-xr-x 2 nitta.v users 4096 Oct 26 17:03 lib
+drwxr-xr-x 2 nitta.v users 4096 Nov  4 08:49 logs
+drwxr-xr-x 2 nitta.v users 4096 Nov  4 08:49 runs
+    rc=0
+--- cmd: ls -la $HOME/hpcjobs/runs
+total 0
+drwxr-xr-x 2 nitta.v users 4096 Nov  4 08:49 .
+drwxr-xr-x 2 nitta.v users 4096 Oct 26 17:03 ..
+drwxr-xr-x 2 nitta.v users 4096 Oct 26 17:30 emit-drip
+drwxr-xr-x 2 nitta.v users 4096 Oct 26 17:03 emit-smoke
+drwxr-xr-x 2 nitta.v users 4096 Nov  4 08:49 emit-smoke-11615388
+drwxr-xr-x 2 nitta.v users 4096 Oct 28 12:54 trka-pilot-20261028T162307Z
+    rc=0
+--- cmd: du -sh --max-depth=1 /scratch/$USER
+du: warning: summarizing conflicts with --max-depth=1
+Try 'du --help' for more information.
+    rc=1

@@ -1,0 +1,70 @@
+== HPC_PROJECT_DIR=/home/nitta.v/hpcjobs
+total 44
+drwxr-xr-x 2 nitta.v users  4096 Oct 26 17:03 .
+drwxr-xr-x 2 nitta.v users  4096 Oct 26 17:03 ..
+-rw-r--r-- 1 nitta.v users 35813 Nov  4 08:46 emit.py
+drwxr-xr-x 2 nitta.v users  4096 Nov  4 08:49 __pycache__
+-rw-r--r-- 1 nitta.v users  9164 Oct 28 12:14 runspec.py
+--- emit.py head ---
+#!/usr/bin/env python3
+"""Record what a run produced, and draw its curve. One file, staged to the job.
+
+    import emit
+
+    with emit.stage("inference"):
+        emit.design("designs/trka_040.pdb", target="TrkA", method="independent")
+
+    with emit.stage("evaluation"):
+        emit.score("trka_040", seq_idx=3, ipae_angstrom=5.8,
+                   plddt_0to1=0.934, scrmsd_angstrom=1.12)
+        emit.cluster("c1", ["trka_040", "trka_041"], method="tmalign",
+                     threshold=2.0, compared_structurally=True)
+
+    with emit.stage("admin"):
+        emit.job_cost("11451240", state="COMPLETED", elapsed_s=415, gpus=1)
+        emit.curve()                       # -> curve.csv (+ curve.png)
+
+Seven verbs. Everything else goes through `emit.write(kind, **fields)`, which
+validates against the same schema, so the surface does not grow for records
+that are only a set of fields.
+
+                        --- why these seven are typed ---
+
+A verb earns its own name only when it does work the caller would otherwise get
+wrong:
+
+  design()    hashes the file. Without it an artifact cannot be verified later.
+  score()     COMPUTES success from the declared rule. The caller never passes
+              it, so a score and the rule it cites cannot disagree.
+  cluster()   carries compared_structurally, which is what separates a real
+              clustering result from a shortcut on length or chain count.
+  job_cost()  normalises per-job GPU-hours, so the x axis has one shape across
+              runs instead of each run inventing a ledger.
+  stage()     a context manager, so stage_ended cannot be forgotten and is
+              still written when the body raises.
+  curve()     assembles and writes the curve from this run's own records, using
+              the same function the operator's record.py uses. The agent's
+              figure and the operator's chart cannot disagree, because there is
+              one implementation.
+  write()     the escape hatch. Validated, so it is not a back door.
+
+                          --- where the ids come from ---
+
+SLURM_JOB_ID is set by Slurm, and that is the one that matters: no caller ever
+passes a job id, so design-to-job cannot be omitted. Off the cluster a job id is
+generated and job_id_source records that it did not come from Slurm, so the two
+cases never get confused.
+
+RUN_ID, RUN_DIR and RUN_STAGE are set by the *job script*, not by the connector.
+`connector.py submit` exports only HPC_PROJECT_DIR and the cache paths
+(`runners/hpc.py:107`), so every job script has to declare its own:
+
+    export RUN_ID="${RUN_ID:-<one id for the whole run>}"
+    export RUN_DIR="${HPC_PROJECT_DIR:-$HOME/hpcjobs}/runs/$RUN_ID"
+
+One RUN_ID for the whole run, not per job: it is what groups several jobs into
+one run, and what the operator passes to fetch_events afterwards.
+
+                             --- one file per writer ---
+--- sha ---
+358ade403f7374d1f42807d757678cedbde48700098260701cf21e84228c4f23  /home/nitta.v/hpcjobs/lib/emit.py
