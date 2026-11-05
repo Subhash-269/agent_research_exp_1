@@ -1,0 +1,115 @@
+=== cxa_smoke_tnf  job=11638423  node=d4053  2026-11-05T07:29:00Z ===
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=2 run_name=cxaB_smoke_tnf_11638423
+PROGRESS 2026-11-05T07:29:00Z 1/8 hardware attestation (S2)
+name, memory.total [MiB], driver_version, compute_cap
+NVIDIA H200, 143771 MiB, 570.86.15, 9.0
+OK   2026-11-05T07:29:00Z stage 'nvidia_smi' exited 0
+Complexa environment initialized for uv runtime.
+COMPLEXA_INIT=uv  DATA_PATH=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets
+{
+  "gpu_present": true,
+  "vendor": "NVIDIA (torch.version.hip is None -> CUDA build, not ROCm)",
+  "device_name": "NVIDIA H200",
+  "vram_total_mib": 143167,
+  "compute_capability": "9.0",
+  "cuda_runtime": "12.6",
+  "torch_version": "2.7.0+cu126",
+  "bf16_supported": true
+}
+attested
+OK   2026-11-05T07:29:08Z stage 'torch_attest' exited 0
+PROGRESS 2026-11-05T07:29:08Z 1b/8 S4 - VRAM and speed at float32 and bfloat16 on this device
+{
+  "device": "NVIDIA H200",
+  "matmul_n": 4096,
+  "reps": 20,
+  "float32": {
+    "peak_vram_mib": 288.0,
+    "seconds_per_matmul": 0.00597
+  },
+  "bfloat16": {
+    "peak_vram_mib": 160.0,
+    "seconds_per_matmul": 0.002817
+  }
+}
+OK   2026-11-05T07:29:12Z stage 'precision_probe' exited 0
+PROGRESS 2026-11-05T07:29:12Z 1c/8 jax devices
+jax 0.4.29 [cuda(id=0)]
+OK   2026-11-05T07:29:15Z stage 'jax_devices' exited 0
+PROGRESS 2026-11-05T07:29:15Z 2/8 multi-chain target inspection (S10)
+task: 38_TNFalpha
+target_input: A12-157,B12-157,C12-157
+hotspots: ['A113', 'C73']
+binder_length: [50, 120]
+target_path: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets/target_data/alpha_proteo_targets/1tnf_cropped.pdb exists: True
+chains in the shipped PDB: {'A': 1142, 'B': 1142, 'C': 1142}
+n_chains: 3
+OK   2026-11-05T07:29:16Z stage 'target_chains' exited 0
+PROGRESS 2026-11-05T07:29:16Z 3/8 complexa design (generate -> filter -> evaluate -> analyze)
+
+============================================================
+  🧬 Complexa Binder Design Pipeline
+============================================================
+  Config:       configs/search_binder_local_pipeline.yaml
+  Target:       38_TNFalpha
+  Run:          cxaB_smoke_tnf_11638423
+  GPUs:         1
+  Steps:        generate, filter, evaluate, analyze
+============================================================
+
+────────────────────────────────────────────────────────────
+  🔥💻 Step 1/4: generate
+  Generate binder structures using the partially latent flow matching model
+────────────────────────────────────────────────────────────
+
+  Command: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/python -W ignore -W ignore::DeprecationWarning -W ignore::FutureWarning -W ignore::UserWarning -m proteinfoundation.generate --config-path /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/configs --config-name search_binder_local_pipeline ++job_id=0 ++base_config_name=search_binder_local_pipeline ++seed=20261106 ++generation.task_name=38_TNFalpha ++generation.search.algorithm=best-of-n ++generation.dataloader.dataset.nres.nsamples=2 ++generation.search.best_of_n.replicas=1 ++ckpt_path=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts ++autoencoder_ckpt_path=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts/complexa_ae.ckpt ++metric.sequence_types=[self,mpnn] ++metric.num_redesign_seqs=8 ++metric.inverse_folding_model=protein_mpnn ++metric.compute_monomer_metrics=false ++metric.compute_designability=false ++metric.compute_codesignability=false ++metric.compute_esm_metrics=false ++run_name=cxaB_smoke_tnf_11638423 ++gen_njobs=1
+
+Loading Atomworks Patches
+[atomworks_patches] Patched initialize_chain_info_from_category
+[atomworks_patches] Patched atom_array_to_encoding (added atomize_token parameter)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/generate.py", line 28, in <module>
+    from proteinfoundation.proteina import Proteina
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/proteina.py", line 17, in <module>
+    from proteinfoundation.utils.sample_utils import add_clean_samples, sample_formatting
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/utils/sample_utils.py", line 13, in <module>
+    from proteinfoundation.utils.pdb_utils import create_full_prot, to_pdb
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/utils/pdb_utils.py", line 51, in <module>
+    from atomworks.io.utils.selection import AtomSelectionStack
+ImportError: cannot import name 'AtomSelectionStack' from 'atomworks.io.utils.selection' (/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/lib/python3.12/site-packages/atomworks/io/utils/selection.py)
+
+  ✗ generate failed with exit code 1
+Traceback (most recent call last):
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/complexa", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 1992, in main
+    handle_design(args)
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 1340, in handle_design
+    run_design_pipeline(config, steps, verbose=args.verbose)
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 884, in run_design_pipeline
+    run_step(step_name, config, current=idx, total=total_steps)
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 754, in run_step
+    subprocess.run(cmd, check=True, env=env)
+  File "/home/nitta.v/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/python', '-W', 'ignore', '-W', 'ignore::DeprecationWarning', '-W', 'ignore::FutureWarning', '-W', 'ignore::UserWarning', '-m', 'proteinfoundation.generate', '--config-path', '/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/configs', '--config-name', 'search_binder_local_pipeline', '++job_id=0', '++base_config_name=search_binder_local_pipeline', '++seed=20261106', '++generation.task_name=38_TNFalpha', '++generation.search.algorithm=best-of-n', '++generation.dataloader.dataset.nres.nsamples=2', '++generation.search.best_of_n.replicas=1', '++ckpt_path=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts', '++autoencoder_ckpt_path=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts/complexa_ae.ckpt', '++metric.sequence_types=[self,mpnn]', '++metric.num_redesign_seqs=8', '++metric.inverse_folding_model=protein_mpnn', '++metric.compute_monomer_metrics=false', '++metric.compute_designability=false', '++metric.compute_codesignability=false', '++metric.compute_esm_metrics=false', '++run_name=cxaB_smoke_tnf_11638423', '++gen_njobs=1']' returned non-zero exit status 1.
+design wall seconds: 290
+FAIL 2026-11-05T07:34:06Z stage 'complexa_design' exited 1
+PROGRESS 2026-11-05T07:34:06Z 4/8 output layout
+--- ./inference dirs matching this run ---
+--- ./evaluation_results dirs matching this run ---
+--- every sequence_type_stats.json under this run's evaluation output ---
+EVAL_DIR=
+no evaluation directory matched run_name=cxaB_smoke_tnf_11638423
+PROGRESS 2026-11-05T07:34:06Z 5/8 stats schema
+PROGRESS 2026-11-05T07:34:06Z 6/8 emit designs and scores
+PROGRESS 2026-11-05T07:34:06Z 7/8 metric ranges
+no score records from this job
+OK   2026-11-05T07:34:06Z stage 'metric_ranges' exited 0
+PROGRESS 2026-11-05T07:34:06Z 8/8 done
+=== SUMMARY  STAGE_RC=6  2026-11-05T07:34:06Z ===
+telemetry rows: 63
+peak GPU memory.used (MiB) seen by the sampler: 1
