@@ -1,0 +1,13 @@
+     JOBID           NAME    STATE     TIME NODELIST(REASON)
+  11646330    cxa_tnf_bon  PENDING     0:00 (Priority)
+  11646367     cxa_tnf_fk  PENDING     0:00 (Priority)
+  11646351   cxa_tnf_beam  PENDING     0:00 (Priority)
+  11646373   cxa_tnf_mcts  PENDING     0:00 (Priority)
+  11646394   cxa_trka_bon  PENDING     0:00 (Priority)
+  11646391     cxa_tnf_gh  PENDING     0:00 (Priority)
+--- sacct ---
+11646330|cxa_tnf_bon|PENDING|0
+11646351|cxa_tnf_beam|PENDING|0
+11646367|cxa_tnf_fk|PENDING|0
+11646373|cxa_tnf_mcts|PENDING|0
+11646391|cxa_tnf_gh|PENDING|0

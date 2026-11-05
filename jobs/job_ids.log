@@ -17,3 +17,11 @@
 2026-11-05T08:15Z  11639259  cell_tnf_mcts.sbatch   gpu/gpu:h200:1  sweep 38_TNFalpha x mcts        seed 20261109 nsamples 4
 2026-11-05T08:15Z  11639264  cell_tnf_gh.sbatch     gpu/gpu:h200:1  sweep 38_TNFalpha x Generate-and-Hallucinate repo-internal variant, seed 20261110 nsamples 4
 2026-11-05T08:15Z  11639280  cell_trka_bon.sbatch   gpu/gpu:h200:1  sweep 33_TrkA x best-of-n       seed 20261111 nsamples 32
+2026-11-05T08:20Z  11639185 11639229 11639242 11639259 11639264 11639280  ALL SIX FAILED in <25 s. Cause read from the job log, not inferred: `complexa design: error: argument --steps: invalid choice: '++run_name=...'`. cli_runner.py:964 declares --steps nargs="+" with choices and :970 declares overrides as a positional nargs="*", so `--steps generate ++run_name=...` makes argparse consume the first override as a second step name. My error, introduced in cell_worker.sh after the smoke job passed: job 11638953 never passed --steps at all, so the changed line was never exercised before six jobs were submitted on it. 13+4+6+3+24+5 = 55 s x 1 GPU / 3600 = 0.0153 GPU-hours, charged in full through emit.job_cost.
+2026-11-05T09:05Z  --  FIX: --steps moved after every positional override, in both calls. Verified against a local argparse replica of cli_runner.py:953-974 before resubmitting (old order reproduces exit 2, new order parses). tools/push.py -> exit 0; md5sum both sides 782ba46b4f19304fef52883602f0ad38.
+2026-11-05T09:06Z  11646330  cell_tnf_bon.sbatch    gpu/gpu:h200:1  resubmit of 11639185  seed 20261106 nsamples 32
+2026-11-05T09:06Z  11646351  cell_tnf_beam.sbatch   gpu/gpu:h200:1  resubmit of 11639229  seed 20261107 nsamples 4
+2026-11-05T09:07Z  11646367  cell_tnf_fk.sbatch     gpu/gpu:h200:1  resubmit of 11639242  seed 20261108 nsamples 4
+2026-11-05T09:07Z  11646373  cell_tnf_mcts.sbatch   gpu/gpu:h200:1  resubmit of 11639259  seed 20261109 nsamples 4
+2026-11-05T09:08Z  11646391  cell_tnf_gh.sbatch     gpu/gpu:h200:1  resubmit of 11639264  seed 20261110 nsamples 4  Generate-and-Hallucinate repo-internal variant
+2026-11-05T09:08Z  11646394  cell_trka_bon.sbatch   gpu/gpu:h200:1  resubmit of 11639280  seed 20261111 nsamples 32

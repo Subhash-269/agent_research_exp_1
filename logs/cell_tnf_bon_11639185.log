@@ -1,0 +1,14 @@
+=== cell tnf_bon  job=11639185  node=d4055  2026-11-05T08:17:55Z ===
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=32
+run_name=cxaB_tnf_bon_11639185  walltime_limit=7200s
+NVIDIA H200, 143771 MiB, 9.0
+PROGRESS 2026-11-05T08:17:56Z 1/5 generate  method=best-of-n nsamples=32
+usage: complexa design [-h] [--verbose]
+                       [--steps {generate,filter,evaluate,analyze} [{generate,filter,evaluate,analyze} ...]]
+                       config [overrides ...]
+complexa design: error: argument --steps: invalid choice: '++run_name=cxaB_tnf_bon_11639185' (choose from generate, filter, evaluate, analyze)
+generate wall seconds: 1
+FAIL 2026-11-05T08:17:58Z stage 'generate' exited 2
+generated structures: 0  (dir: none)
+FAIL generation produced no structures; nothing to evaluate
+=== SUMMARY  STAGE_RC=2  2026-11-05T08:17:58Z ===

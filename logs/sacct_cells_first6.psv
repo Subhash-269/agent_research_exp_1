@@ -1,0 +1,6 @@
+11639185|cxa_tnf_bon|FAILED|13|2026-11-05T03:17:54|2026-11-05T03:18:07|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+11639229|cxa_tnf_beam|FAILED|4|2026-11-05T03:19:03|2026-11-05T03:19:07|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+11639242|cxa_tnf_fk|FAILED|6|2026-11-05T03:20:08|2026-11-05T03:20:14|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+11639259|cxa_tnf_mcts|FAILED|3|2026-11-05T03:21:14|2026-11-05T03:21:17|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+11639264|cxa_tnf_gh|FAILED|24|2026-11-05T03:22:19|2026-11-05T03:22:43|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+11639280|cxa_trka_bon|FAILED|5|2026-11-05T03:23:44|2026-11-05T03:23:49|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1

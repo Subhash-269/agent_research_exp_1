@@ -111,7 +111,13 @@ export HF_HOME="$RUN_ROOT/cache/hf"      # re-assert after .env (S16)
 # =============================================================================
 PROGRESS "1/5 generate  method=$METHOD nsamples=$NSAMPLES"
 GEN_START=$SECONDS
-complexa design configs/search_binder_local_pipeline.yaml --steps generate \
+# NOTE on argument order. `--steps` is nargs='+' and the hydra overrides are
+# positional, so `--steps generate ++run_name=...` makes argparse swallow the
+# first override as a second value for --steps and die with
+#   invalid choice: '++run_name=...' (choose from generate, filter, ...)
+# which is exactly how jobs 11639185/229/242/259/264/280 each failed in under
+# 25 s. The flag therefore goes AFTER every positional override.
+complexa design configs/search_binder_local_pipeline.yaml \
     ++run_name="$RUN_NAME" \
     ++seed=$SEED \
     ++generation.task_name="$TARGET" \
@@ -120,6 +126,7 @@ complexa design configs/search_binder_local_pipeline.yaml --steps generate \
     ++ckpt_path="$REPO/ckpts" \
     ++autoencoder_ckpt_path="$REPO/ckpts/complexa_ae.ckpt" \
     $EXTRA_OVERRIDES \
+    --steps generate \
     --verbose 2>&1 | tail -60
 GEN_RC=${PIPESTATUS[0]}
 GEN_S=$((SECONDS - GEN_START))
@@ -162,7 +169,7 @@ fi
 # =============================================================================
 PROGRESS "2/5 filter + evaluate + analyze"
 EVAL_START=$SECONDS
-complexa design configs/search_binder_local_pipeline.yaml --steps filter evaluate analyze \
+complexa design configs/search_binder_local_pipeline.yaml \
     ++run_name="$RUN_NAME" \
     ++seed=$SEED \
     ++generation.task_name="$TARGET" \
@@ -178,6 +185,7 @@ complexa design configs/search_binder_local_pipeline.yaml --steps filter evaluat
     ++metric.compute_codesignability=false \
     ++metric.compute_esm_metrics=false \
     $EXTRA_OVERRIDES \
+    --steps filter evaluate analyze \
     --verbose 2>&1 | tail -80
 EVAL_RC=${PIPESTATUS[0]}
 echo "evaluate wall seconds: $((SECONDS - EVAL_START))"
