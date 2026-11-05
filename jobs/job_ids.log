@@ -25,3 +25,6 @@
 2026-11-05T09:07Z  11646373  cell_tnf_mcts.sbatch   gpu/gpu:h200:1  resubmit of 11639259  seed 20261109 nsamples 4
 2026-11-05T09:08Z  11646391  cell_tnf_gh.sbatch     gpu/gpu:h200:1  resubmit of 11639264  seed 20261110 nsamples 4  Generate-and-Hallucinate repo-internal variant
 2026-11-05T09:08Z  11646394  cell_trka_bon.sbatch   gpu/gpu:h200:1  resubmit of 11639280  seed 20261111 nsamples 32
+2026-11-05T09:12Z  11646402  cell_trka_beam.sbatch  gpu/gpu:h200:1  sweep 33_TrkA x beam-search seed 20261112 nsamples 4  (not previously submitted)
+2026-11-05T09:13Z  11646416  cell_trka_fk.sbatch    gpu/gpu:h200:1  sweep 33_TrkA x fk-steering seed 20261113 nsamples 4  (not previously submitted)
+2026-11-05T09:13Z  --  QOS cap reached: `gpu` allows 8 submitted jobs per user and 8 are now queued. cell_trka_mcts and cell_trka_gh (seeds 20261114, 20261115) are written and committed but DELIBERATELY not submitted; they go in as earlier cells complete. This is a queue-slot limit, not a decision to drop them.

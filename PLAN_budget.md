@@ -1,4 +1,4 @@
-<!-- version: plan-v1  written 2026-11-05, before the first GPU job -->
+<!-- version: plan-v2  written 2026-11-05 before the first GPU job; revised 2026-11-05 after the smoke run, see section 8 -->
 # Budget plan: allocating the 100 GPU-hour ceiling
 
 PROJECT.md requires this plan to exist **before the first GPU job** and to be updated as GPU
@@ -147,3 +147,85 @@ No extension is requested inside the run.
 | date (UTC) | change |
 |---|---|
 | 2026-11-05 | v1 written before the first GPU job. |
+| 2026-11-05 | v2: section 8 added. Sweep cut from 40 jobs / 80.0 GPU-hours to 10 jobs / 20.0 GPU-hours. The binding constraint is wall-clock, not the ceiling. |
+
+
+---
+
+## 8. Revision after the smoke run: what the sweep actually is
+
+Section 3 planned 40 sweep jobs and 80.0 GPU-hours. **That is not what was submitted**, and the
+difference is large enough that reading section 3 alone would misdescribe the run.
+
+### What changed
+
+| | planned (v1) | submitted (v2) |
+|---|---|---|
+| sweep jobs | 40 | 10 |
+| jobs per (target, method) cell | 4 | 1 |
+| walltime each | 2 h | 2 h |
+| **inferred** sweep GPU-hours | 40 x 2 x 1 = **80.0** | 10 x 2 x 1 = **20.0** |
+| points per cell on the curve | 4 | **1** |
+
+### Why
+
+**measured** (`squeue -u $USER` -> exit 0, `logs/squeue_resume2.txt`): the QOS permits **4
+concurrent GPUs and 8 submitted jobs**. 40 jobs of 2 h at 4 at a time is
+**inferred**: 40 x 2 / 4 = 20.0 hours of wall-clock, before any queueing. The eight cells
+submitted on 2026-11-05 all sat `PENDING (Priority)` behind other users' work, so 20.0 hours is
+a floor, not an estimate.
+
+The ceiling was never going to bind. **The limit on this run is session wall-clock.** v1 did not
+say that, and it should have: a plan that allocates 84.0 of 100.0 GPU-hours implies the ceiling
+is the scarce resource, and here it is not. Cumulative spend at the time of this revision is
+0.3184 GPU-hours, **0.32% of the ceiling**.
+
+### What this costs, stated plainly
+
+Section 3's own argument for 4 jobs per cell was that `curve()` places one point per job, so a
+cell run as a single job yields **a one-point curve with no shape**. Cutting to 1 job per cell
+gives up exactly that. The consequence is concrete and must not be glossed:
+
+- Each (target, method) cell contributes **one point**, at the cumulative GPU-hours when that
+  job ended. Comparing methods *along* the curve is therefore **not supported by this run**;
+  only the endpoints are comparable.
+- PROJECT.md asks for methods comparable at any point along the curve. **This run does not
+  deliver that**, and the report says so rather than presenting 10 points as a curve.
+
+The alternative — 4 x 2 h per cell for 2 cells only — would have bought curve shape for 2 of the
+10 (target, method) pairs and nothing for the other 8. Covering all 10 pairs once was chosen
+instead, because PROJECT.md's primary question is a comparison *across the five methods*, which
+needs every method present. **This is my choice, and the trade is recorded here so a reader can
+disagree with it.**
+
+### If wall-clock allows, cells are extended, not replaced
+
+Extra jobs appended to a cell carry their own `job_cost` and add points to that cell's curve,
+which is why the allowance is expressed per job rather than per cell. Nothing already recorded
+is discarded to do it.
+
+### Seeds, corrected
+
+v1 wrote `seed = SEED_BASE + 1000 * cell_index + job_index`, which assumed 4 jobs per cell.
+With one job per cell the formula actually used is
+
+```
+seed = SEED_BASE + cell_index        # source: tools/make_cells.py:122, SEED_BASE = 20261105
+```
+
+giving 20261106 through 20261115, **distinct per cell** (S15). No two jobs share a seed, and no
+two differently-seeded jobs are pooled onto one curve point.
+
+### Budget after the revision
+
+| Phase | Jobs | **inferred** GPU-hours |
+|---|---|---|
+| 0, setup (CPU only, `--partition=short`) | 7 | 7 x 0 = 0.00 |
+| 1, attestation + multi-chain smoke | 4 (3 failed, 1 completed) | 0.3031 |
+| failed sweep cells (argparse defect) | 6 | 55 s x 1 / 3600 = 0.0153 |
+| 2, sweep as resubmitted | 10 | 10 x 2 x 1 = 20.00 |
+| **committed total** | | 0.3031 + 0.0153 + 20.00 = **20.32** |
+| **unspent against the ceiling** | | 100.00 - 20.32 = **79.68** |
+
+The run will finish well under the ceiling. That is a fact about the wall-clock available, not
+evidence that the methods are cheap, and the report states it that way.
