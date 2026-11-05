@@ -7,3 +7,4 @@
 2026-11-05T07:15Z  11638336  02_smoke_multichain.sbatch  gpu/gpu:h200:1  phase 1 multi-chain smoke, resubmission of 11638284 on an available card
 2026-11-05T07:22Z  11638423  02_smoke_multichain.sbatch  gpu/gpu:h200:1  phase 1 multi-chain smoke retry after sourcing env.sh (11638336 failed on "Environment not initialized")
 2026-11-05T07:40Z  11638677  03_atomworks_fix.sbatch  short/none  phase 0 atomworks API probe + charge 11638284/11638336/11638423, CPU only, 0 GPU-hours
+2026-11-05T07:45Z  11638744  04_atomworks_pin.sbatch  short/none  phase 0 atomworks pin via wheel-source probe

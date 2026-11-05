@@ -1,0 +1,71 @@
+=== cxa_atomworks  job=11638677  node=c0219  2026-11-05T07:37:27Z ===
+PROGRESS 2026-11-05T07:37:27Z 1/5 charge finished jobs
+[charge] already on record: ['11637680']
+[charge] 11638284: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] 11638336: FAILED elapsed=67s gpus=1 -> 0.018611 GPU-hours (67 s x 1 GPU / 3600)
+[charge] 11638423: FAILED elapsed=308s gpus=1 -> 0.085556 GPU-hours (308 s x 1 GPU / 3600)
+[charge] charged 3, skipped 0
+OK   2026-11-05T07:37:28Z stage 'charge_jobs' exited 0
+PROGRESS 2026-11-05T07:37:28Z 2/5 available atomworks versions
+error: unrecognized subcommand 'index'
+
+Usage: uv pip [OPTIONS] <COMMAND>
+
+For more information, try '--help'.
+FAIL 2026-11-05T07:37:28Z stage 'index_versions' exited 2
+currently installed: Version: 3.0.4
+PROGRESS 2026-11-05T07:37:32Z 3/5 probe versions for AtomSelectionStack.from_contig
+candidates (newest 10):  
+FAIL no atomworks version on the index provides AtomSelectionStack.from_contig
+FAIL 2026-11-05T07:37:32Z stage 'probe_atomworks' exited 10
+PROGRESS 2026-11-05T07:37:32Z 4/5 import checks after the pin
+PROGRESS 2026-11-05T07:37:32Z 4b/5 re-freeze
+OK   2026-11-05T07:37:32Z stage 'uv_pip_freeze' exited 0
+atomworks==3.0.4
+biotite==1.6.0
+jax==0.4.29
+jax-cuda12-pjrt==0.4.29
+jax-cuda12-plugin==0.4.29
+jaxlib==0.4.29+cuda12.cudnn91
+jaxtyping==0.3.11
+torch==2.7.0+cu126
+torch-cluster==1.6.3+pt27cu126
+torch-geometric==2.8.1
+torch-scatter==2.1.2+pt27cu126
+torch-sparse==0.6.18+pt27cu126
+torchaudio==2.7.0+cu126
+torchmetrics==1.9.0
+torchvision==0.22.0+cu126
+transformers==5.22.1
+PROGRESS 2026-11-05T07:37:32Z 5/5 config resolves + generate module imports (no GPU)
+
+======================================================================
+  [1m🔍 Validation Report: Design Pipeline[0m
+  [2mConfig: configs/search_binder_local_pipeline.yaml[0m
+======================================================================
+
+  [93m[1m⚠ Warnings (1):[0m
+    [93m⚠[0m Shape complementarity (sc)
+      [2mFile not found: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/env/docker/internal/sc[0m
+      [96m💡 Ensure the file exists at the specified path[0m
+
+  [92m[1m✓ Passed (6):[0m
+    [92m✓[0m .env file: Found
+    [92m✓[0m DATA_PATH: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets
+    [92m✓[0m Config file: configs/search_binder_local_pipeline.yaml
+    [92m✓[0m Complexa checkpoint: ckpts/complexa.ckpt
+    [92m✓[0m Autoencoder checkpoint: ckpts/complexa_ae.ckpt
+    [92m✓[0m Foldseek: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/foldseek
+
+──────────────────────────────────────────────────────────────────────
+  [93m⚠ Validation passed with warnings[0m
+======================================================================
+
+OK   2026-11-05T07:37:33Z stage 'validate_design' exited 0
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/utils/sample_utils.py", line 13, in <module>
+    from proteinfoundation.utils.pdb_utils import create_full_prot, to_pdb
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/utils/pdb_utils.py", line 51, in <module>
+    from atomworks.io.utils.selection import AtomSelectionStack
+ImportError: cannot import name 'AtomSelectionStack' from 'atomworks.io.utils.selection' (/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/lib/python3.12/site-packages/atomworks/io/utils/selection.py)
+FAIL 2026-11-05T07:39:42Z stage 'generate_imports' exited 1
+=== SUMMARY  STAGE_RC=1  2026-11-05T07:39:42Z ===
