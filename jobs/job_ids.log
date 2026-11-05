@@ -40,3 +40,7 @@
 2026-11-05T15:16Z  11647423  cell_tnf_fk.sbatch    gpu/gpu:a100:1 (explicit)  seed 20261108 nsamples 4 batch_size 2
 2026-11-05T15:16Z  11647431  cell_tnf_mcts.sbatch  gpu/gpu:a100:1 (explicit)  seed 20261109 nsamples 4 batch_size 2
 2026-11-05T15:17Z  11647436  cell_tnf_gh.sbatch    gpu/gpu:a100:1 (explicit)  seed 20261110 nsamples 4 batch_size 2  Generate-and-Hallucinate repo-internal variant
+2026-11-05T15:18Z  11647440  cell_trka_bon.sbatch   gpu/gpu:a100:1 (explicit)  seed 20261111 nsamples 16 batch_size 2
+2026-11-05T15:18Z  11647455  cell_trka_beam.sbatch  gpu/gpu:a100:1 (explicit)  seed 20261112 nsamples 4 batch_size 2
+2026-11-05T15:19Z  11647491  cell_trka_fk.sbatch    gpu/gpu:a100:1 (explicit)  seed 20261113 nsamples 4 batch_size 2
+2026-11-05T15:19Z  --  8 of 10 cells submitted, QOS cap reached. cell_trka_mcts (seed 20261114) and cell_trka_gh (seed 20261115) are written and committed, held back by the 8-submitted-job limit, and go in as slots free. Not dropped.
