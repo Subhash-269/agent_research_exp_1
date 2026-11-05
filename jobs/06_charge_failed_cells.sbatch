@@ -1,13 +1,21 @@
 #!/bin/bash
 # =============================================================================
-# Charge the six sweep cells that failed on the --steps argparse error.
+# Charge every sweep cell that produced no designs: the six that failed on the
+# --steps argparse error, plus 11646330 (CUDA OOM in generation on an A100-40GB
+# at the repo-default batch_size=16) and the seven I cancelled while PENDING
+# once that OOM showed they would hit the same wall.
 # CPU ONLY, --partition=short, 0 GPU-hours.
 #
 # AGENTS.md: "job_cost for every job, including failed ones and ones cancelled
 # while pending. A failed allocation is charged in full, and a curve that omits
-# it is retrospectively optimistic." These six held an H200 allocation for 3-24
-# seconds each before argparse rejected the command line. That is real GPU time
+# it is retrospectively optimistic." Those six held a GPU allocation for 3-24
+# seconds each before argparse rejected the command line (node d4055). That is real GPU time
 # this run spent and did not get a design for, so it goes on the ledger.
+#
+# The seven cancelled-while-PENDING jobs never held a GPU and bill 0 s, but they
+# are charged anyway: AGENTS.md is explicit that a job cancelled while pending
+# is recorded, and a run whose ledger shows only the jobs that ran reads as if
+# nothing was abandoned.
 #
 # A job's own sacct figures are not final while it runs, so this runs after they
 # have all left the queue - confirmed empty by `squeue -u $USER` before submit.
@@ -15,7 +23,7 @@
 # deriving anything from it (S11), and treats a missing row as a hard stop
 # rather than a skipped record.
 # =============================================================================
-#SBATCH --job-name=cxa_charge6
+#SBATCH --job-name=cxa_charge14
 #SBATCH --partition=short
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
@@ -41,13 +49,15 @@ check() {
     echo "OK   $(STAMP) stage '$2' exited 0"; return 0
 }
 
-echo "=== cxa_charge6  job=$SLURM_JOB_ID  node=$(hostname)  $(STAMP) ==="
+echo "=== cxa_charge14  job=$SLURM_JOB_ID  node=$(hostname)  $(STAMP) ==="
 source "$REPO/.venv/bin/activate" || exit 1
 cd "$REPO" || exit 1
 
-# source: the six job ids recorded in workspace/jobs/job_ids.log at submission
-# (S8), all of them FAILED on the argparse error in cell_worker.sh.
-FAILED_CELLS="11639185 11639229 11639242 11639259 11639264 11639280"
+# source: workspace/jobs/job_ids.log, where every one of these was written at
+# submission (S8). 11639185-11639280 FAILED on the argparse error in
+# cell_worker.sh; 11646330 FAILED with CUDA OOM; 11646351-11646416 were
+# CANCELLED by me while PENDING. None of the fourteen produced a design.
+FAILED_CELLS="11639185 11639229 11639242 11639259 11639264 11639280 11646330 11646351 11646367 11646373 11646391 11646394 11646402 11646416"
 
 echo "charging: $FAILED_CELLS"
 python "$RUN_ROOT/tools/charge_jobs.py" $FAILED_CELLS 2>&1 | tail -40

@@ -1,0 +1,3 @@
+11646703 JobState=COMPLETED 
+11646721 JobState=PENDING TresPerNode=gres/gpu:a100:1 
+11646743 JobState=PENDING TresPerNode=gres/gpu:a100:1 

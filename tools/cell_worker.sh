@@ -49,6 +49,27 @@ EXTRA_OVERRIDES="${EXTRA_OVERRIDES:-}"
 # plus roughly 400 s of fixed load, rounded up.
 MIN_EVAL_SECONDS=${MIN_EVAL_SECONDS:-900}
 
+# Samples per forward pass. THIS IS A VRAM CONSTANT, not a throughput knob.
+# source: measured. The repo default is 16
+# (configs/pipeline/binder/binder_generate.yaml:19), and search.max_batch_size
+# inherits from it (:49). Job 11646330 ran at that default with nsamples=32 and
+# died in generation:
+#   torch.OutOfMemoryError: Tried to allocate 4.67 GiB. GPU 0 has a total
+#   capacity of 39.49 GiB of which 1.27 GiB is free.
+# in concat_pair_feature_factory.py:442, which materialises a pair
+# representation of [b, n_extended, n_extended, pair_dim] - quadratic in
+# residues and linear in batch. 38_TNFalpha is 438 target residues plus a
+# 50-120 residue binder, so the pair tensor is large before any batching.
+#
+# 2 is the batch the only successful generation in this run used: job 11638953,
+# nsamples=2, peak GPU memory.used 12580 MiB of 143771 on an H200, read from
+# its own telemetry CSV. 12580 MiB fits an A100-40GB (40960 MiB) with room to
+# spare; 8x that does not. Setting it explicitly rather than inheriting the
+# default is the point - S4 is "measure VRAM on the smallest unit of work
+# before committing to the largest", and the largest was committed to without
+# re-measuring. That was the defect.
+BATCH_SIZE=${BATCH_SIZE:-2}
+
 RUN_NAME="cxaB_${CELL_TAG}_${SLURM_JOB_ID}"
 mkdir -p "$TMPDIR" "$RUN_ROOT/logs" "$RUN_ROOT/sacct" "$RUN_DIR" || exit 1
 
@@ -95,7 +116,7 @@ cleanup() {
 trap cleanup EXIT TERM INT
 
 echo "=== cell $CELL_TAG  job=$SLURM_JOB_ID  node=$(hostname)  $(STAMP) ==="
-echo "target=$TARGET method=$METHOD seed=$SEED nsamples=$NSAMPLES"
+echo "target=$TARGET method=$METHOD seed=$SEED nsamples=$NSAMPLES batch_size=$BATCH_SIZE"
 echo "run_name=$RUN_NAME  walltime_limit=${WALL_LIMIT_S}s"
 nvidia-smi --query-gpu=name,memory.total,compute_cap --format=csv,noheader
 
@@ -123,6 +144,7 @@ complexa design configs/search_binder_local_pipeline.yaml \
     ++generation.task_name="$TARGET" \
     ++generation.search.algorithm="$METHOD" \
     ++generation.dataloader.dataset.nres.nsamples=$NSAMPLES \
+    ++generation.dataloader.batch_size=$BATCH_SIZE \
     ++ckpt_path="$REPO/ckpts" \
     ++autoencoder_ckpt_path="$REPO/ckpts/complexa_ae.ckpt" \
     $EXTRA_OVERRIDES \
@@ -175,6 +197,7 @@ complexa design configs/search_binder_local_pipeline.yaml \
     ++generation.task_name="$TARGET" \
     ++generation.search.algorithm="$METHOD" \
     ++generation.dataloader.dataset.nres.nsamples=$NSAMPLES \
+    ++generation.dataloader.batch_size=$BATCH_SIZE \
     ++ckpt_path="$REPO/ckpts" \
     ++autoencoder_ckpt_path="$REPO/ckpts/complexa_ae.ckpt" \
     ++metric.sequence_types="[self,mpnn]" \

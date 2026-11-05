@@ -1,0 +1,70 @@
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=32
+run_name=cxaB_tnf_bon_11646330  walltime_limit=7200s
+NVIDIA A100-SXM4-40GB, 40960 MiB, 8.0
+NVIDIA A100-SXM4-40GB, 40960 MiB, 8.0
+PROGRESS 2026-11-05T14:30:00Z 1/5 generate  method=best-of-n nsamples=32
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/search/single_pass_generation.py", line 22, in search
+    gen_samples = self.proteina.generate(batch)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/proteina.py", line 588, in generate
+    gen_samples = self.fm.full_simulation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/flow_matching/product_space_flow_matcher.py", line 806, in full_simulation
+    nn_out = self.get_clean_pred_n_guided_vector(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/flow_matching/product_space_flow_matcher.py", line 674, in get_clean_pred_n_guided_vector
+    nn_out = _add_clean_n_sim_tensor(batch, mode="full")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/flow_matching/product_space_flow_matcher.py", line 669, in _add_clean_n_sim_tensor
+    nn_out_dict = predict_for_sampling(batch, mode=mode)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/proteina.py", line 195, in predict_for_sampling
+    nn_out = self.call_nn(batch, n_recycle=n_recycle)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/proteina.py", line 161, in call_nn
+    nn_out = self.nn(batch)
+             ^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/nn/local_latents_transformer.py", line 245, in forward
+    pair_rep = self.concat_pair_factory(input, pair_rep, orig_mask)  # [b, n_extended, n_extended, pair_dim]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/nn/feature_factory/concat_pair_feature_factory.py", line 442, in forward
+    extended_pair_rep = extended_pair_rep * extended_mask[:, :, None, None] * extended_mask[:, None, :, None]
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.67 GiB. GPU 0 has a total capacity of 39.49 GiB of which 1.27 GiB is free. Including non-PyTorch memory, this process has 38.22 GiB memory in use. Of the allocated memory 26.88 GiB is allocated by PyTorch, and 8.84 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+Predicting DataLoader 0:   0%|          | 0/2 [00:21<?, ?it/s]
+
+  ✗ generate failed with exit code 1
+Traceback (most recent call last):
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/complexa", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 1992, in main
+    handle_design(args)
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 1340, in handle_design
+    run_design_pipeline(config, steps, verbose=args.verbose)
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 884, in run_design_pipeline
+    run_step(step_name, config, current=idx, total=total_steps)
+  File "/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/src/proteinfoundation/cli/cli_runner.py", line 754, in run_step
+    subprocess.run(cmd, check=True, env=env)
+  File "/home/nitta.v/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/python', '-W', 'ignore', '-W', 'ignore::DeprecationWarning', '-W', 'ignore::FutureWarning', '-W', 'ignore::UserWarning', '-m', 'proteinfoundation.generate', '--config-path', '/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/configs', '--config-name', 'search_binder_local_pipeline', '++job_id=0', '++base_config_name=search_binder_local_pipeline', '++seed=20261106', '++generation.task_name=38_TNFalpha', '++generation.search.algorithm=best-of-n', '++generation.dataloader.dataset.nres.nsamples=32', '++ckpt_path=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts', '++autoencoder_ckpt_path=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts/complexa_ae.ckpt', '++run_name=cxaB_tnf_bon_11646330', '++gen_njobs=1']' returned non-zero exit status 1.
+generate wall seconds: 335
+FAIL 2026-11-05T14:35:35Z stage 'generate' exited 1
+generated structures: 0  (dir: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/inference/search_binder_local_pipeline_38_TNFalpha_cxaB_tnf_bon_11646330)
+FAIL generation produced no structures; nothing to evaluate
+=== SUMMARY  STAGE_RC=1  2026-11-05T14:35:36Z ===

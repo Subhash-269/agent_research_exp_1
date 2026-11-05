@@ -26,9 +26,15 @@ WALL_SECONDS = 2 * 3600
 # as belonging to this run.
 SEED_BASE = 20261105
 
-# source: S3 and the preflight survey. h200 nodes had free GPUs when a100 did
-# not; both are compute capability >= 8.0, which is what the model needs.
-GRES = "gpu:h200:1"
+# source: measured, `scontrol show job` on the 11646330-11646416 batch.
+# This was gpu:h200:1 and it did NOT take effect: connector.py submit puts
+# --gres on the sbatch command line from its config (runners/hpc.py:143), which
+# overrides the #SBATCH directive, and every one of those eight jobs was
+# allocated gpu:a100:1. Rather than keep a directive that the submit path
+# ignores, the cells now name the card they actually get, and the submit passes
+# the same value explicitly so the two agree. A100-SXM4-40GB is compute
+# capability 8.0 with bf16, which is what S3 requires and what the model needs.
+GRES = "gpu:a100:1"
 PARTITION = "gpu"
 
 # --- targets ---------------------------------------------------------------
@@ -59,7 +65,17 @@ TARGETS = [
 # for rather than a flaw in it.
 METHODS = [
     # (tag, search.algorithm, nsamples, extra hydra overrides)
-    ("bon",  "best-of-n",   32, ""),
+    # 32 -> 16. source: measured, job 11646330. At nsamples=32 generation
+    # died with torch.OutOfMemoryError on an A100-40GB, and the fix for THAT
+    # is batch_size=2 in cell_worker.sh, not a smaller nsamples. nsamples
+    # comes down for a separate reason: the 32 was sized from H200 throughput
+    # (job 11638953) and this run has no A100 throughput measurement at all.
+    # 16 x 180 s + 400 s = 3280 s against a 7200 s allowance leaves room for
+    # an A100 to be more than twice as slow as the H200 the number came from.
+    # If it turns out faster, the cell finishes early and the next job extends
+    # the curve; if it overruns, the walltime guard skips evaluation with a
+    # reason rather than letting Slurm kill the job mid-generation.
+    ("bon",  "best-of-n",   16, ""),
     ("beam", "beam-search",  4, ""),
     ("fk",   "fk-steering",  4, ""),
     ("mcts", "mcts",         4, ""),

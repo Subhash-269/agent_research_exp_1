@@ -1,0 +1,49 @@
+=== cxa_charge14  job=11646703  node=c0610  2026-11-05T14:42:08Z ===
+charging: 11639185 11639229 11639242 11639259 11639264 11639280 11646330 11646351 11646367 11646373 11646391 11646394 11646402 11646416
+[charge] already on record: ['11637680', '11638284', '11638336', '11638423', '11638677', '11638744']
+[charge] 11639185: FAILED elapsed=13s gpus=1 -> 0.003611 GPU-hours (13 s x 1 GPU / 3600)
+[charge] 11639229: FAILED elapsed=4s gpus=1 -> 0.001111 GPU-hours (4 s x 1 GPU / 3600)
+[charge] 11639242: FAILED elapsed=6s gpus=1 -> 0.001667 GPU-hours (6 s x 1 GPU / 3600)
+[charge] 11639259: FAILED elapsed=3s gpus=1 -> 0.000833 GPU-hours (3 s x 1 GPU / 3600)
+[charge] 11639264: FAILED elapsed=24s gpus=1 -> 0.006667 GPU-hours (24 s x 1 GPU / 3600)
+[charge] 11639280: FAILED elapsed=5s gpus=1 -> 0.001389 GPU-hours (5 s x 1 GPU / 3600)
+[charge] 11646330: FAILED elapsed=349s gpus=1 -> 0.096944 GPU-hours (349 s x 1 GPU / 3600)
+[charge] 11646351: CANCELLED by 104766 elapsed=29s gpus=1 -> 0.008056 GPU-hours (29 s x 1 GPU / 3600)
+[charge] 11646367: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] 11646373: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] 11646391: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] 11646394: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] 11646402: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] 11646416: CANCELLED by 104766 elapsed=0s gpus=1 -> 0.0 GPU-hours (0 s x 1 GPU / 3600)
+[charge] charged 14, skipped 0
+OK   2026-11-05T14:42:12Z stage 'charge_failed_cells' exited 0
+--- sacct rows saved to disk ---
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11639185.psv  114 bytes
+11639185|FAILED|13|2026-11-05T03:17:54|2026-11-05T03:18:07|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11639229.psv  113 bytes
+11639229|FAILED|4|2026-11-05T03:19:03|2026-11-05T03:19:07|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11639242.psv  113 bytes
+11639242|FAILED|6|2026-11-05T03:20:08|2026-11-05T03:20:14|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11639259.psv  113 bytes
+11639259|FAILED|3|2026-11-05T03:21:14|2026-11-05T03:21:17|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11639264.psv  114 bytes
+11639264|FAILED|24|2026-11-05T03:22:19|2026-11-05T03:22:43|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11639280.psv  113 bytes
+11639280|FAILED|5|2026-11-05T03:23:44|2026-11-05T03:23:49|gpu|d4055|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646330.psv  115 bytes
+11646330|FAILED|349|2026-11-05T09:29:55|2026-11-05T09:35:44|gpu|d1026|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646351.psv  127 bytes
+11646351|CANCELLED by 104766|29|2026-11-05T09:37:24|2026-11-05T09:37:53|gpu|d1026|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646367.psv  119 bytes
+11646367|CANCELLED by 104766|0|None|2026-11-05T09:38:02|gpu|None assigned|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646373.psv  119 bytes
+11646373|CANCELLED by 104766|0|None|2026-11-05T09:38:15|gpu|None assigned|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646391.psv  119 bytes
+11646391|CANCELLED by 104766|0|None|2026-11-05T09:38:30|gpu|None assigned|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646394.psv  119 bytes
+11646394|CANCELLED by 104766|0|None|2026-11-05T09:38:41|gpu|None assigned|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646402.psv  119 bytes
+11646402|CANCELLED by 104766|0|None|2026-11-05T09:39:01|gpu|None assigned|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646416.psv  119 bytes
+11646416|CANCELLED by 104766|0|None|2026-11-05T09:39:13|gpu|None assigned|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+=== SUMMARY  STAGE_RC=0  2026-11-05T14:42:12Z ===
