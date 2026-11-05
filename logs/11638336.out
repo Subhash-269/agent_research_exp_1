@@ -1,0 +1,68 @@
+=== cxa_smoke_tnf  job=11638336  node=d4053  2026-11-05T07:14:43Z ===
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=2 run_name=cxaB_smoke_tnf_11638336
+PROGRESS 2026-11-05T07:14:43Z 1/8 hardware attestation (S2)
+name, memory.total [MiB], driver_version, compute_cap
+NVIDIA H200, 143771 MiB, 570.86.15, 9.0
+OK   2026-11-05T07:14:43Z stage 'nvidia_smi' exited 0
+{
+  "gpu_present": true,
+  "vendor": "NVIDIA (torch.version.hip is None -> CUDA build, not ROCm)",
+  "device_name": "NVIDIA H200",
+  "vram_total_mib": 143167,
+  "compute_capability": "9.0",
+  "cuda_runtime": "12.6",
+  "torch_version": "2.7.0+cu126",
+  "bf16_supported": true
+}
+attested
+OK   2026-11-05T07:15:21Z stage 'torch_attest' exited 0
+PROGRESS 2026-11-05T07:15:21Z 1b/8 S4 - VRAM and speed at float32 and bfloat16 on this device
+{
+  "device": "NVIDIA H200",
+  "matmul_n": 4096,
+  "reps": 20,
+  "float32": {
+    "peak_vram_mib": 288.0,
+    "seconds_per_matmul": 0.047851
+  },
+  "bfloat16": {
+    "peak_vram_mib": 160.0,
+    "seconds_per_matmul": 0.011868
+  }
+}
+OK   2026-11-05T07:15:28Z stage 'precision_probe' exited 0
+PROGRESS 2026-11-05T07:15:28Z 1c/8 jax devices
+jax 0.4.29 [cuda(id=0)]
+OK   2026-11-05T07:15:42Z stage 'jax_devices' exited 0
+PROGRESS 2026-11-05T07:15:42Z 2/8 multi-chain target inspection (S10)
+task: 38_TNFalpha
+target_input: A12-157,B12-157,C12-157
+hotspots: ['A113', 'C73']
+binder_length: [50, 120]
+target_path: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/assets/target_data/alpha_proteo_targets/1tnf_cropped.pdb exists: True
+chains in the shipped PDB: {'A': 1142, 'B': 1142, 'C': 1142}
+n_chains: 3
+OK   2026-11-05T07:15:43Z stage 'target_chains' exited 0
+PROGRESS 2026-11-05T07:15:43Z 3/8 complexa design (generate -> filter -> evaluate -> analyze)
+
+  Environment not initialized. Run:
+    complexa init <uv|docker>
+    source env.sh
+
+design wall seconds: 0
+FAIL 2026-11-05T07:15:43Z stage 'complexa_design' exited 1
+PROGRESS 2026-11-05T07:15:43Z 4/8 output layout
+--- ./inference dirs matching this run ---
+--- ./evaluation_results dirs matching this run ---
+--- every sequence_type_stats.json under this run's evaluation output ---
+EVAL_DIR=
+no evaluation directory matched run_name=cxaB_smoke_tnf_11638336
+PROGRESS 2026-11-05T07:15:43Z 5/8 stats schema
+PROGRESS 2026-11-05T07:15:43Z 6/8 emit designs and scores
+PROGRESS 2026-11-05T07:15:43Z 7/8 metric ranges
+no score records from this job
+OK   2026-11-05T07:15:43Z stage 'metric_ranges' exited 0
+PROGRESS 2026-11-05T07:15:43Z 8/8 done
+=== SUMMARY  STAGE_RC=6  2026-11-05T07:15:43Z ===
+telemetry rows: 14
+peak GPU memory.used (MiB) seen by the sampler: 4

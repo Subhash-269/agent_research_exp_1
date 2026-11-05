@@ -5,3 +5,4 @@
 2026-11-05T07:08Z  11638284  02_smoke_multichain.sbatch  gpu/gpu:a100:1  phase 1 FIRST GPU JOB: S2+S4 attestation and multi-chain smoke on 38_TNFalpha, best-of-n, seed 20261106, 2h cap
 2026-11-05T07:15Z  11638284  CANCELLED while PENDING. Reason given by the scheduler: "Nodes required for job are DOWN, DRAINED or reserved". scontrol showed every a100 GPU allocated (d1026 3/3, d1029 4/4, d1028 drained) while h200 nodes had free GPUs (d4052 6/8). Cancelled and resubmitted on h200. elapsed 0 s; still charged through emit.job_cost.
 2026-11-05T07:15Z  11638336  02_smoke_multichain.sbatch  gpu/gpu:h200:1  phase 1 multi-chain smoke, resubmission of 11638284 on an available card
+2026-11-05T07:22Z  11638423  02_smoke_multichain.sbatch  gpu/gpu:h200:1  phase 1 multi-chain smoke retry after sourcing env.sh (11638336 failed on "Environment not initialized")
