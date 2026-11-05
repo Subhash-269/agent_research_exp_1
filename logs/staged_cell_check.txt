@@ -1,0 +1,5 @@
+/home/nitta.v/hpcjobs/jobs/cell_tnf_bon.sbatch
+--- staged copies ---
+== /home/nitta.v/hpcjobs/jobs/cell_tnf_bon.sbatch
+13:#SBATCH --gres=gpu:h200:1
+651868c5a5fe8df6aaa444aa0ddb9cb3  /home/nitta.v/hpcjobs/jobs/cell_tnf_bon.sbatch

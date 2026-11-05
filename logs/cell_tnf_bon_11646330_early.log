@@ -1,0 +1,12 @@
+cxa_tnf_bon_11646330.out
+cxa_trka_bon_11639280.out
+cxa_tnf_gh_11639264.out
+cxa_tnf_mcts_11639259.out
+cxa_tnf_fk_11639242.out
+---
+=== cell tnf_bon  job=11646330  node=d1026  2026-11-05T14:29:59Z ===
+target=38_TNFalpha method=best-of-n seed=20261106 nsamples=32
+run_name=cxaB_tnf_bon_11646330  walltime_limit=7200s
+NVIDIA A100-SXM4-40GB, 40960 MiB, 8.0
+NVIDIA A100-SXM4-40GB, 40960 MiB, 8.0
+PROGRESS 2026-11-05T14:30:00Z 1/5 generate  method=best-of-n nsamples=32

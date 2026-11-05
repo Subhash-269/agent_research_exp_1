@@ -1,0 +1,8 @@
+11646330 TresPerNode=gres/gpu:a100:1
+11646351 TresPerNode=gres/gpu:a100:1
+11646367 TresPerNode=gres/gpu:a100:1
+11646373 TresPerNode=gres/gpu:a100:1
+11646391 TresPerNode=gres/gpu:a100:1
+11646394 TresPerNode=gres/gpu:a100:1
+11646402 TresPerNode=gres/gpu:a100:1
+11646416 TresPerNode=gres/gpu:a100:1
