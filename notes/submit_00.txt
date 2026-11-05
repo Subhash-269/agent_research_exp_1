@@ -1,0 +1,3 @@
+submitted 11637680  (00_env_build.sbatch)  runner=hpc
+  watch : python connector.py watch 11637680
+  logs  : python connector.py logs 11637680

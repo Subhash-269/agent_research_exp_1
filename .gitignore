@@ -36,3 +36,15 @@ env_build/
 #   logs/*               - fetched job stdout; the evidence behind every claim
 #   results/*.csv, *.json - emitted records and curves, small text
 #   connector_copy/compute/audit.log, jobs.jsonl - the connector's own trail
+
+# --- third-party mirror: what is kept and what is not ---------------------
+# The Proteina-Complexa source is mirrored at commit
+# 8fc6f5c85b38a2585ffaac555e708576dc4e8533 so the code this run depended on is
+# readable here. Two parts of that checkout are excluded:
+#   assets/   ~114 MB of target structure data shipped by the repo. It is data,
+#             not source, it is unchanged from upstream, and PROJECT.md tells
+#             me to use it exactly as shipped rather than re-slicing it.
+#   .git/     ~111 MB of upstream history; the commit hash above identifies the
+#             tree more usefully than a vendored object store.
+third_party/Proteina-Complexa/assets/
+third_party/*/.git/

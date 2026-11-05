@@ -1,0 +1,1 @@
+../skills/_shared/references/SEARCH_METADATA.md

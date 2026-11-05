@@ -1,0 +1,3 @@
+# S8: every job id written to disk at submission, before anything else.
+# <utc submitted>  <job id>  <script>  <partition/gres>  <purpose>
+2026-11-05T06:55Z  11637680  00_env_build.sbatch  short/none  phase 0 environment build, CPU only, 0 GPU-hours
