@@ -1,0 +1,18 @@
+kind counts: {'stage_started': 8, 'run_started': 1, 'stage_ended': 8, 'job_ended': 20, 'design': 34, 'rule_declared': 2, 'score': 306}
+scores: 306  successes: 0
+--- per job ---
+  job 11638953: scored 18 success 0
+  job 11646721: scored 288 success 0
+--- per seq_source ---
+  mpnn: scored 272 success 0
+  native: scored 34 success 0
+--- metric ranges, all scores ---
+  ipae_angstrom: n=306 min=8.9590 max=29.7600 median=28.5665
+  ipae_stored: n=306 min=0.2890 max=0.9600 median=0.9215
+  plddt_0to1: n=306 min=0.2310 max=0.8590 median=0.6400
+  scrmsd_angstrom: n=306 min=0.3159 max=17.9196 median=1.3042
+--- per-criterion pass counts on the 288 from 11646721 ---
+  n = 288
+  ipae_angstrom < 7 : 0
+  plddt_0to1    > 0.9: 0
+  scrmsd  < 1.5 : 161

@@ -1,0 +1,10 @@
+=== cxa_chg  job=11648653  node=c3031  2026-11-05T16:43:49Z ===
+charging: 11646721
+[charge] already on record: ['11637680', '11638284', '11638336', '11638423', '11638677', '11638744', '11639185', '11639229', '11639242', '11639259', '11639264', '11639280', '11646330', '11646351', '11646367', '11646373', '11646391', '11646394', '11646402', '11646416']
+[charge] 11646721: COMPLETED elapsed=6593s gpus=1 -> 1.831389 GPU-hours (6593 s x 1 GPU / 3600)
+[charge] charged 1, skipped 0
+OK   2026-11-05T16:43:51Z stage 'charge_failed_cells' exited 0
+--- sacct rows saved to disk ---
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11646721.psv  119 bytes
+11646721|COMPLETED|6593|2026-11-05T09:49:16|2026-11-05T11:39:09|gpu|d1026|billing=112,cpu=12,gres/gpu=1,mem=96G,node=1
+=== SUMMARY  STAGE_RC=0  2026-11-05T16:43:51Z ===

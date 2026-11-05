@@ -1,0 +1,7 @@
+PROGRESS 2026-11-05T14:49:24Z 1/5 generate  method=best-of-n nsamples=16
+generate wall seconds: 1407
+OK   2026-11-05T15:12:51Z stage 'generate' exited 0
+generated structures: 32  (dir: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/inference/search_binder_local_pipeline_38_TNFalpha_cxaB_tnf_bon_11646721)
+PROGRESS 2026-11-05T15:12:52Z 2/5 filter + evaluate + analyze
+--- npdb ---
+0

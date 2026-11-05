@@ -1,0 +1,18 @@
+  11647436     cxa_tnf_gh  PENDING       0:00
+  11647440   cxa_trka_bon  PENDING       0:00
+  11647491    cxa_trka_fk  PENDING       0:00
+  11647455  cxa_trka_beam  PENDING       0:00
+  11646743   cxa_tnf_beam  RUNNING    1:01:59
+  11647423     cxa_tnf_fk  RUNNING    1:01:59
+  11647431   cxa_tnf_mcts  RUNNING    1:01:59
+--- tnf_bon tail ---
+evaluate wall seconds: 5172
+OK   2026-11-05T16:39:04Z stage 'evaluate' exited 0
+PROGRESS 2026-11-05T16:39:04Z 3/5 locate this job's evaluation output
+EVAL_DIR=/scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_tnf_bon_11646721
+PROGRESS 2026-11-05T16:39:04Z 4/5 emit designs and per-sequence scores
+[record] 32 sequence_type_stats.json under /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/evaluation_results/search_binder_local_pipeline_38_TNFalpha_cxaB_tnf_bon_11646721
+[record] designs=32 scores=288
+OK   2026-11-05T16:39:09Z stage 'record_results' exited 0
+PROGRESS 2026-11-05T16:39:09Z 5/5 cell summary
+=== SUMMARY  STAGE_RC=0  2026-11-05T16:39:09Z ===

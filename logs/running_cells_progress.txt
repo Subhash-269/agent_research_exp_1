@@ -1,0 +1,6 @@
+== tnf_beam 11646743
+PROGRESS 2026-11-05T15:38:50Z 1/5 generate  method=beam-search nsamples=4
+== tnf_fk 11647423
+PROGRESS 2026-11-05T15:38:51Z 1/5 generate  method=fk-steering nsamples=4
+== tnf_mcts 11647431
+PROGRESS 2026-11-05T15:38:51Z 1/5 generate  method=mcts nsamples=4

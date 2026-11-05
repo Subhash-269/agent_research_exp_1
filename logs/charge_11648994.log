@@ -1,0 +1,16 @@
+[charge] charged 5, skipped 0
+OK   2026-11-05T16:54:22Z stage 'charge_failed_cells' exited 0
+--- sacct rows saved to disk ---
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11638131.psv  106 bytes
+11638131|COMPLETED|370|2026-11-05T02:00:15|2026-11-05T02:06:25|short|c0606|billing=8,cpu=8,mem=48G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11638848.psv  106 bytes
+11638848|COMPLETED|228|2026-11-05T02:48:19|2026-11-05T02:52:07|short|c0219|billing=8,cpu=8,mem=32G,node=1
+OK   /scratch/nitta.v/complexa_armB_20261105/sacct/11638953.psv  118 bytes
+--- queue ---
+  11647440   cxa_trka_bon  PENDING       0:00
+  11647491    cxa_trka_fk  PENDING       0:00
+  11647455  cxa_trka_beam  PENDING       0:00
+  11646743   cxa_tnf_beam  RUNNING    1:32:30
+  11647423     cxa_tnf_fk  RUNNING    1:32:30
+  11647431   cxa_tnf_mcts  RUNNING    1:32:30
+  11647436     cxa_tnf_gh  RUNNING      20:43
