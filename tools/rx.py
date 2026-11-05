@@ -55,13 +55,19 @@ def main() -> int:
 
     proc = be._run(args.command, check=False, timeout=args.timeout,
                    action=args.action)
-    sys.stdout.write(proc.stdout)
-    if proc.stderr.strip():
-        sys.stderr.write(proc.stderr)
+
+    # Save BEFORE printing. This console is cp1252 and cluster tools emit
+    # U+2713 and friends, so writing to stdout can raise UnicodeEncodeError -
+    # which would otherwise lose the captured output as well as the display.
     if args.save:
         p = Path(args.save)
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(proc.stdout, encoding="utf-8", newline="\n")
+
+    enc = sys.stdout.encoding or "utf-8"
+    sys.stdout.write(proc.stdout.encode(enc, "replace").decode(enc, "replace"))
+    if proc.stderr.strip():
+        sys.stderr.write(proc.stderr.encode(enc, "replace").decode(enc, "replace"))
     print(f"\n[rx] exit={proc.returncode}", file=sys.stderr)
     return proc.returncode
 

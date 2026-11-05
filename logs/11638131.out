@@ -1,0 +1,121 @@
+=== cxa_envfix  job=11638131  node=c0606  2026-11-05T07:00:17Z ===
+PROGRESS 2026-11-05T07:00:17Z 1/6 charge job 11637680
+11637680|FAILED|721|2026-11-05T01:44:30|2026-11-05T01:56:31|short|c0606
+OK   2026-11-05T07:00:17Z stage 'sacct_11637680' exited 0
+charged 11637680 FAILED 721 s, 0 GPUs
+OK   2026-11-05T07:00:17Z stage 'emit_job_cost_11637680' exited 0
+PROGRESS 2026-11-05T07:00:17Z 2/6 pin torchaudio to 2.7.0+cu126
+Resolved 29 packages in 1.38s
+Downloading torchaudio (3.3MiB)
+ Downloaded torchaudio
+Prepared 1 package in 947ms
+Uninstalled 1 package in 553ms
+Installed 1 package in 855ms
+ - torchaudio==2.11.0+cu126
+ + torchaudio==2.7.0+cu126
+OK   2026-11-05T07:00:21Z stage 'pin_torchaudio' exited 0
+PROGRESS 2026-11-05T07:00:21Z 2b/6 does transformers import ESM now?
+torch 2.7.0+cu126 torchaudio 2.7.0+cu126
+transformers ESM imports OK
+OK   2026-11-05T07:00:56Z stage 'transformers_esm_import' exited 0
+PROGRESS 2026-11-05T07:00:56Z 3/6 uv pip freeze
+OK   2026-11-05T07:00:56Z stage 'uv_pip_freeze' exited 0
+packages pinned: 235
+alphafold-colabfold==2.3.7
+jax==0.4.29
+jax-cuda12-pjrt==0.4.29
+jax-cuda12-plugin==0.4.29
+jaxlib==0.4.29+cuda12.cudnn91
+jaxtyping==0.3.11
+torch==2.7.0+cu126
+torch-cluster==1.6.3+pt27cu126
+torch-geometric==2.8.1
+torch-scatter==2.1.2+pt27cu126
+torch-sparse==0.6.18+pt27cu126
+torchaudio==2.7.0+cu126
+torchmetrics==1.9.0
+torchvision==0.22.0+cu126
+transformers==5.22.1
+PROGRESS 2026-11-05T07:00:56Z 4/6 complexa download --all (retry)
+2967200K .......... .......... .......... .......... .......... 99% 5.27M 0s
+2967250K .......... .......... .......... .......... .......... 99% 13.5M 0s
+2967300K .......... .......... .......... .......... .......... 99% 9.43M 0s
+2967350K .......... .......... .......... .......... .......... 99% 17.2M 0s
+2967400K .......... .......... .......... .......... .......... 99% 1.45M 0s
+2967450K .......... .......... .......... .......... .......... 99% 3.92M 0s
+2967500K .......... .......... .......... .......... .......... 99% 35.7M 0s
+2967550K .......... .......... .......... .......... .......... 99% 4.84M 0s
+2967600K .......... .......... .......... .......... .......... 99% 8.09M 0s
+2967650K ..                                                    100% 5.18T=4m55s
+
+2026-11-05 02:06:18 (9.81 MB/s) - ‘./community_models/ckpts/RF3/rf3_foundry_01_24_latest_remapped.ckpt’ saved [3038876446/3038876446]
+
+[0;32m✓[0m RoseTTAFold3 weights downloaded to community_models/ckpts/RF3/ successfully!
+
+[0;35m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1m[1;37m  Community Downloads Complete! 🎉[0m
+[0;35m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+
+[0;35m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1m[1;37m  Current Installation Status[0m
+[0;35m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1mComplexa Models (Required):[0m
+    Complexa (Protein): [0;32m✓ Installed (ckpts/)[0m
+    Complexa (Ligand):  [1;33m○ Missing (ckpts/):[0m
+      [0;31m✗[0m complexa_ligand.ckpt (flow matching model)
+      [0;31m✗[0m complexa_ligand_ae.ckpt (autoencoder)
+    Complexa (AME):     [1;33m○ Missing (ckpts/):[0m
+      [0;31m✗[0m complexa_ame.ckpt (flow matching model)
+      [0;31m✗[0m complexa_ame_ae.ckpt (autoencoder)
+
+  [1mCore Models:[0m
+    ProteinMPNN:     [0;32m✓ Installed (community_models/ProteinMPNN/)[0m
+    LigandMPNN:      [0;32m✓ Installed (community_models/LigandMPNN/model_params/)[0m
+    AlphaFold2:      [0;32m✓ Installed (community_models/ckpts/AF2/)[0m
+    ESM2:            [0;32m✓ Installed (community_models/ckpts/ESM2/)[0m
+    RF3:             [0;32m✓ Installed (community_models/ckpts/RF3/)[0m
+
+OK   2026-11-05T07:06:18Z stage 'download_community_retry' exited 0
+[0;35m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1m[1;37m  Current Installation Status[0m
+[0;35m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1mComplexa Models (Required):[0m
+    Complexa (Protein): [0;32m✓ Installed (ckpts/)[0m
+    Complexa (Ligand):  [1;33m○ Missing (ckpts/):[0m
+      [0;31m✗[0m complexa_ligand.ckpt (flow matching model)
+      [0;31m✗[0m complexa_ligand_ae.ckpt (autoencoder)
+    Complexa (AME):     [1;33m○ Missing (ckpts/):[0m
+      [0;31m✗[0m complexa_ame.ckpt (flow matching model)
+      [0;31m✗[0m complexa_ame_ae.ckpt (autoencoder)
+
+  [1mCore Models:[0m
+    ProteinMPNN:     [0;32m✓ Installed (community_models/ProteinMPNN/)[0m
+    LigandMPNN:      [0;32m✓ Installed (community_models/LigandMPNN/model_params/)[0m
+    AlphaFold2:      [0;32m✓ Installed (community_models/ckpts/AF2/)[0m
+    ESM2:            [0;32m✓ Installed (community_models/ckpts/ESM2/)[0m
+    RF3:             [0;32m✓ Installed (community_models/ckpts/RF3/)[0m
+
+PROGRESS 2026-11-05T07:06:18Z 5/6 artifact checks
+present: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts/complexa.ckpt (2934289381 bytes)
+present: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/ckpts/complexa_ae.ckpt (4100101779 bytes)
+present: /scratch/nitta.v/complexa_armB_20261105/src/Proteina-Complexa/.venv/bin/foldseek (30779480 bytes)
+present: /scratch/nitta.v/complexa_armB_20261105/logs/pip_freeze.txt (4609 bytes)
+total 5456991
+drwxr-xr-x 2 nitta.v users      4096 Nov  5 01:54 .
+drwxr-xr-x 2 nitta.v users      4096 Nov  5 02:01 ..
+-rw-r--r-- 1 nitta.v users     18657 Mar 23  2020 LICENSE
+-rw-r--r-- 1 nitta.v users 373043148 Nov 22  2022 params_model_1_multimer_v3.npz
+-rw-r--r-- 1 nitta.v users 373069562 Jul 19  2021 params_model_1.npz
+-rw-r--r-- 1 nitta.v users 373103340 Jul 19  2021 params_model_1_ptm.npz
+-rw-r--r-- 1 nitta.v users 373043148 Nov 22  2022 params_model_2_multimer_v3.npz
+-rw-r--r-- 1 nitta.v users 373069562 Jul 19  2021 params_model_2.npz
+-rw-r--r-- 1 nitta.v users 373103340 Jul 19  2021 params_model_2_ptm.npz
+OK   2026-11-05T07:06:18Z stage 'artifacts_present' exited 0
+PROGRESS 2026-11-05T07:06:18Z 6/6 target definitions
+38_TNFalpha: chains=['A', 'B', 'C'] n_chains=3 input=A12-157,B12-157,C12-157 hotspots=['A113', 'C73'] binder_len=[50, 120] file=./assets/target_data/alpha_proteo_targets/1tnf_cropped.pdb
+33_TrkA: chains=['X'] n_chains=1 input=X282-382 hotspots=['X294', 'X296', 'X333'] binder_len=[50, 120] file=./assets/target_data/alpha_proteo_targets/1www_cropped.pdb
+OK   2026-11-05T07:06:18Z stage 'targets_used' exited 0
+=== SUMMARY  STAGE_RC=0  2026-11-05T07:06:18Z ===

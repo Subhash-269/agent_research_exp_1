@@ -2,3 +2,4 @@
 # <utc submitted>  <job id>  <script>  <partition/gres>  <purpose>
 2026-11-05T06:55Z  11637680  00_env_build.sbatch  short/none  phase 0 environment build, CPU only, 0 GPU-hours
 2026-11-05T07:00Z  11638131  00b_env_fix.sbatch  short/none  phase 0 repair (torchaudio pin, uv pip freeze, ESM2 retry) + job_cost for 11637680
+2026-11-05T07:08Z  11638284  02_smoke_multichain.sbatch  gpu/gpu:a100:1  phase 1 FIRST GPU JOB: S2+S4 attestation and multi-chain smoke on 38_TNFalpha, best-of-n, seed 20261106, 2h cap
