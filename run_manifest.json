@@ -11,7 +11,7 @@
   "project_md_sha256": "af3f6dc7bcc18ef5d8cffa5b10e9510aade87465b977acdc8a760d9b12a84992",
   "checksum_note": "No operator-issued checksum was supplied for either brief, so there is nothing to reconcile against. Both values are sha256sum over the whole file as delivered (AGENTS.md 25088 bytes, PROJECT.md 10048 bytes; byte range 0..EOF in each case), computed this session with `sha256sum AGENTS.md PROJECT.md` -> exit 0.",
   "run_id": "complexa_armB_20261105",
-  "run_remote": "absent. No run_remote.txt sits beside AGENTS.md, so per R8 the workspace is committed locally and not pushed.",
+  "run_remote": "No run_remote.txt sits beside AGENTS.md. Under R8 alone that is an instruction to commit locally and not push, and that is what the run did until 2026-11-05. The operator then instructed in-session: 'use this repo to commit and push regualay - https://github.com/Subhash-269/agent_research_exp_1.git'. The workspace is pushed to that remote and no other. DEVIATION, declared: R8's no-push default was overridden by a direct operator instruction, not by a judgement of mine. I did not create the repository, did not add a second remote, and did not change any repository's visibility. I have NOT verified that the repository is private - that is the operator's decision and outside what this session can see.",
   "connector_provenance": {
     "dir": "C:/Users/subha/Desktop/Workspace/Personal/RA_Full_Run/agenticAI_with_GPUs",
     "git_remote_get_url_origin": "https://github.com/sinitskiy/agenticAI_with_GPUs.git",
@@ -24,5 +24,6 @@
       "2026-11-05T06:08:50Z  hpc     remote    rc=0    echo ok",
       "2026-11-05T06:08:53Z  hpc     remote    rc=0    mkdir -p $HOME/hpcjobs/jobs $HOME/hpcjobs/logs"
     ]
-  }
+  },
+  "push_hygiene": "connector_config.json is excluded by .gitignore and has never been committed; it carries the operator's cluster identity and AGENTS.md restricts it to running the CLI. No token or credential has been committed. The pushed history does contain the cluster username nitta.v, which appears in sacct output, scratch paths and job logs that are part of the run record."
 }
