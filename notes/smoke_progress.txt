@@ -1,0 +1,4 @@
+       JOBID      PARTITION               NAME     STATE        TIME NODELIST(REASON)
+    11638284            gpu      cxa_smoke_tnf   PENDING        0:00 (Nodes required for job are DOWN, DRAINED or reserved for jobs in higher priority partitions)
+--- log tail ---
+tail: cannot open '/home/nitta.v/hpcjobs/logs/cxa_smoke_tnf_11638284.out' for reading: No such file or directory

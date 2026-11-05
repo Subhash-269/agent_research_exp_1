@@ -1,0 +1,24 @@
+== d1026
+   State=MIXED ThreadsPerCore=1 TmpDisk=0 Weight=20 Owner=N/A MCS_label=N/A
+   CfgTRES=cpu=64,mem=500G,billing=364,gres/gpu=3
+   AllocTRES=cpu=32,mem=288G,gres/gpu=3
+== d1029
+   State=MIXED ThreadsPerCore=1 TmpDisk=0 Weight=25 Owner=N/A MCS_label=N/A
+   CfgTRES=cpu=64,mem=510000M,billing=464,gres/gpu=4
+   AllocTRES=cpu=26,mem=304G,gres/gpu=4
+== d4052
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   CfgTRES=cpu=128,mem=500G,billing=928,gres/gpu=8
+   AllocTRES=cpu=100,mem=444G,gres/gpu=6
+== d4053
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   CfgTRES=cpu=128,mem=500G,billing=928,gres/gpu=8
+   AllocTRES=cpu=80,mem=424G,gres/gpu=7
+== d4054
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   CfgTRES=cpu=128,mem=500G,billing=928,gres/gpu=8
+   AllocTRES=cpu=104,mem=499G,gres/gpu=8
+== d4055
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   CfgTRES=cpu=128,mem=500G,billing=928,gres/gpu=8
+   AllocTRES=cpu=62,mem=456G,gres/gpu=8

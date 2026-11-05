@@ -1,0 +1,5 @@
+     JOBID     STATE                         NODELIST(REASON)
+  11638336   PENDING (Nodes required for job are DOWN, DRAINE
+--- start estimate ---
+             JOBID PARTITION     NAME     USER ST          START_TIME  NODES SCHEDNODES           NODELIST(REASON)
+          11638336       gpu cxa_smok  nitta.v PD 2026-11-05T02:23:31      1 d4053                (Nodes required for job are DOWN, DRAINED or reserved for jobs in higher priority partitions)

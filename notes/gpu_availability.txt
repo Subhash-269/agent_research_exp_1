@@ -1,0 +1,52 @@
+   PARTITION  NODES      STATE                       NODELIST                                     GRES
+         gpu      1      down*                          c2204                   gpu:v100-pcie:2(S:0-7)
+         gpu      2      down*                   d[1009,1017]                   gpu:v100-sxm2:4(S:0-1)
+         gpu      1    drained                          d1028                               gpu:a100:4
+         gpu      2      mixed                   c[2206-2207]                   gpu:v100-pcie:2(S:0-1)
+         gpu      8      mixed d[1002,1007,1010-1012,1015,101                   gpu:v100-sxm2:4(S:0-1)
+         gpu      1      mixed                          d1013                   gpu:v100-sxm2:3(S:0-1)
+         gpu      1      mixed                          d1022                          gpu:v100-sxm2:3
+         gpu      1      mixed                          d1025                          gpu:t4:4(S:0-1)
+         gpu      1      mixed                          d1026                               gpu:a100:3
+         gpu      1      mixed                          d1029                               gpu:a100:4
+         gpu      4      mixed                   d[4052-4055]                               gpu:h200:8
+         gpu      1  allocated                          c2205                   gpu:v100-pcie:2(S:0-1)
+         gpu      1  allocated                          d1027                   gpu:v100-sxm2:4(S:0-1)
+--- free gres by node ---
+            NODELIST      STATE                           GRES                            CPUS(A/I/O/T)
+               c2204      down*         gpu:v100-pcie:2(S:0-7)                                0/0/32/32
+               c2205  allocated         gpu:v100-pcie:2(S:0-1)                                32/0/0/32
+               c2206      mixed         gpu:v100-pcie:2(S:0-1)                               20/12/0/32
+               c2207      mixed         gpu:v100-pcie:2(S:0-1)                               20/12/0/32
+               d1002      mixed         gpu:v100-sxm2:4(S:0-1)                               10/18/0/28
+               d1007      mixed         gpu:v100-sxm2:4(S:0-1)                               11/17/0/28
+               d1009      down*         gpu:v100-sxm2:4(S:0-1)                                0/0/28/28
+               d1010      mixed         gpu:v100-sxm2:4(S:0-1)                                27/1/0/28
+               d1011      mixed         gpu:v100-sxm2:4(S:0-1)                               12/16/0/28
+               d1012      mixed         gpu:v100-sxm2:4(S:0-1)                               16/12/0/28
+               d1013      mixed         gpu:v100-sxm2:3(S:0-1)                               16/12/0/28
+               d1015      mixed         gpu:v100-sxm2:4(S:0-1)                               11/17/0/28
+               d1017      down*         gpu:v100-sxm2:4(S:0-1)                                0/0/28/28
+               d1019      mixed         gpu:v100-sxm2:4(S:0-1)                                25/3/0/28
+               d1020      mixed         gpu:v100-sxm2:4(S:0-1)                                19/9/0/28
+               d1022      mixed                gpu:v100-sxm2:3                               10/18/0/28
+               d1025      mixed                gpu:t4:4(S:0-1)                               14/14/0/28
+               d1026      mixed                     gpu:a100:3                               32/32/0/64
+               d1027  allocated         gpu:v100-sxm2:4(S:0-1)                                28/0/0/28
+               d1028    drained                     gpu:a100:4                                0/0/64/64
+               d1029      mixed                     gpu:a100:4                               26/38/0/64
+               d4052      mixed                     gpu:h200:8                             100/28/0/128
+               d4053      mixed                     gpu:h200:8                              80/48/0/128
+               d4054      mixed                     gpu:h200:8                             104/24/0/128
+               d4055      mixed                     gpu:h200:8                              62/66/0/128
+--- pending reasons ---
+     JOBID       USER     NODELIST(REASON)
+  10137925 lu.tianyu2   (QOSMaxGRESPerJob)
+  10490539 kaeberlein   (QOSMaxGRESPerJob)
+  11634531 a.sinitski (QOSMaxJobsPerUserLi
+  11631799  shen.haow (QOSMaxJobsPerUserLi
+  11634403  shen.haow (QOSMaxJobsPerUserLi
+  11634491  shen.haow (QOSMaxJobsPerUserLi
+  11638284    nitta.v (Nodes required for 
+11631750_[     gunn.s         (Dependency)
+  11631415   lee.shih           (Priority)

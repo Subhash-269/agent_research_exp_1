@@ -3,3 +3,5 @@
 2026-11-05T06:55Z  11637680  00_env_build.sbatch  short/none  phase 0 environment build, CPU only, 0 GPU-hours
 2026-11-05T07:00Z  11638131  00b_env_fix.sbatch  short/none  phase 0 repair (torchaudio pin, uv pip freeze, ESM2 retry) + job_cost for 11637680
 2026-11-05T07:08Z  11638284  02_smoke_multichain.sbatch  gpu/gpu:a100:1  phase 1 FIRST GPU JOB: S2+S4 attestation and multi-chain smoke on 38_TNFalpha, best-of-n, seed 20261106, 2h cap
+2026-11-05T07:15Z  11638284  CANCELLED while PENDING. Reason given by the scheduler: "Nodes required for job are DOWN, DRAINED or reserved". scontrol showed every a100 GPU allocated (d1026 3/3, d1029 4/4, d1028 drained) while h200 nodes had free GPUs (d4052 6/8). Cancelled and resubmitted on h200. elapsed 0 s; still charged through emit.job_cost.
+2026-11-05T07:15Z  11638336  02_smoke_multichain.sbatch  gpu/gpu:h200:1  phase 1 multi-chain smoke, resubmission of 11638284 on an available card
